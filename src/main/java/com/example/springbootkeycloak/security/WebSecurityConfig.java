@@ -15,6 +15,7 @@ public class WebSecurityConfig {
 
     public static final String ADMIN = "admin";
     public static final String USER = "user";
+    public static final String INTADMIN = "intadmin";
     private final JwtAuthConverter jwtAuthConverter;
 
     @Bean
@@ -22,6 +23,7 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/test/anonymous", "/test/anonymous/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test/admin", "/test/admin/**").hasRole(ADMIN)
+                .requestMatchers(HttpMethod.GET, "/test/intadmin", "/test/intadmin/**").hasRole(INTADMIN)
                 .requestMatchers(HttpMethod.GET, "/test/user").hasAnyRole(ADMIN, USER)
                 .anyRequest().authenticated();
         http.oauth2ResourceServer()

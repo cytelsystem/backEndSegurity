@@ -13,17 +13,22 @@ public class TestController {
 
     @GetMapping("/anonymous")
     public ResponseEntity<String> getAnonymous() {
+
         return ResponseEntity.ok("Hello Anonymous");
     }
 
     @GetMapping("/admin")
     public ResponseEntity<String> getAdmin() {
+
         return ResponseEntity.ok("Hello Admin");
     }
 
     @GetMapping("/user")
     public ResponseEntity<String> getUser(Principal principal) {
                return ResponseEntity.ok("Hello User ");
-
+    }
+    @GetMapping("/intadmin")
+    public String redirectToClaro() {
+        return "redirect:https://www.claro.com.co";
     }
 }
