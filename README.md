@@ -30,4 +30,7 @@ spring:
             client-secret: CaZ4vUhbOAUuCKBV2rmVF4aUzlDpngz3
             redirect-uri: http://localhost:8086/login/oauth2/code/google
 
+
+![image](https://github.com/cytelsystem/backEndSegurity/assets/41965648/e136b159-62c2-4bf6-8d92-9a94c71351aa)
+
 ### //********************************************************************************************************//
