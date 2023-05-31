@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
   @GetMapping("/user")
   public String hello() {
-    return "hello gateway java 17";
+    return "hello gateway con yml";
   }
   @GetMapping("/role")
   @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
