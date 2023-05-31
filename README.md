@@ -36,3 +36,10 @@ spring:
 ![image](https://github.com/cytelsystem/backEndSegurity/assets/41965648/e136b159-62c2-4bf6-8d92-9a94c71351aa)
 
 ### //********************************************************************************************************//
+
+# Puertos y conexion
+### puerto keycloak http://localhost:8080
+### Conexion a gateway en http://localhost:9090/hello/user
+usuario = user
+Password = password123
+### Microservicio esta en el puerto 8086
