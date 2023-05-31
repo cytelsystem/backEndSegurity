@@ -3,7 +3,7 @@
 
 
 ## Configuracion application.properties microservicio
-### //*************************************************************************************************************************//
+### //********************************************************************************************************//
 server.port=8086
 
 spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8080/realms/dh
@@ -12,7 +12,7 @@ spring.security.oauth2.client.registration.keycloak.client-secret=CaZ4vUhbOAUuCK
 spring.security.oauth2.client.registration.keycloak.redirect-uri=http://localhost:8086/login/oauth2/code/google
 
 ## Configuracion application.yml microservicio
-### //*************************************************************************************************************************//
+### //********************************************************************************************************//
 
 server:
 port: 8086
@@ -30,4 +30,4 @@ spring:
             client-secret: CaZ4vUhbOAUuCKBV2rmVF4aUzlDpngz3
             redirect-uri: http://localhost:8086/login/oauth2/code/google
 
-### //*************************************************************************************************************************//
+### //********************************************************************************************************//
