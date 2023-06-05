@@ -1,0 +1,9 @@
+
+server:
+  port: 8084
+
+keycloak:
+  realm: digital-house
+  serverUrl: http://localhost:8080
+  clientId: interno
+  clientSecret: hfIIlnFD2MUPQOFA8k7jKW4XEALEkLJs
