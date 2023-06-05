@@ -25,7 +25,7 @@ public class UserRestController {
         return UserService.findbyId(id);
     }
 
-    @GetMapping("/{update}")
+    @PutMapping("/{update}")
     public UserDTO findById(@RequestParam String id, @RequestParam String nationality){
         return UserService.updateNationality(id, nationality);
     }
