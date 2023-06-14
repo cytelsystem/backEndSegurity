@@ -3,6 +3,7 @@ package com.dh.msusers.repository;
 import com.dh.msusers.modelDTO.UserDTO;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.UserResource;
+import org.keycloak.representations.idm.RealmRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,31 @@ public class KeyCloakUserRepository implements IUserRepository{
     private String realm;
 
     //******************Metodos Implementados de la interface***********************//
+
+    public void createRealm(String realmName) {
+        RealmRepresentation realm = new RealmRepresentation();
+        realm.setRealm(realmName);
+        realm.setEnabled(true);
+        keycloakClient.realms().create(realm);
+    }
+
+    @Override
+    public UserDTO createUser(UserDTO user) {
+        UserRepresentation newUser = new UserRepresentation();
+        newUser.setUsername(user.getUsername());
+        newUser.setEmail(user.getEmail());
+        newUser.setFirstName(user.getFirstName());
+
+
+        // Establecer otros atributos necesarios para el usuario
+
+        keycloakClient.realm(realm).users().create(newUser);
+
+
+        return toUser(newUser);
+    }
+
+
     @Override
     public List<UserDTO> findByFirName(String name) {
         List<UserRepresentation> users = keycloakClient.realm(realm).users().search(name);

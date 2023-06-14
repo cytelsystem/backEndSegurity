@@ -4,7 +4,7 @@ public class UserDTO {
     private String id;
     private String username;
     private String email;
-    private String firtName;
+    private String firstName;
     private String nationality;
 
     //*********************************Constructor*************************************//
@@ -13,7 +13,7 @@ public class UserDTO {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.firtName = firtName;
+        this.firstName = firtName;
         this.nationality = nationality;
     }
 
@@ -44,12 +44,12 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getFirtName() {
-        return firtName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirtName(String firtName) {
-        this.firtName = firtName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getNationality() {

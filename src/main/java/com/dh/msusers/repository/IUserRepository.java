@@ -14,5 +14,7 @@ public interface IUserRepository {
 
     public UserDTO updateNationality(String id, String nationality);
 
+    public UserDTO createUser(UserDTO user);
+
 
 }

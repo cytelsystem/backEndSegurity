@@ -3,6 +3,7 @@ package com.dh.msusers.controller;
 import com.dh.msusers.modelDTO.UserDTO;
 import com.dh.msusers.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,13 @@ public class UserRestController {
 
     @Autowired
     private UserService UserService;
+
+
+    @PostMapping("/crear")
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
+        UserDTO createdUser = UserService.createUser(user);
+        return ResponseEntity.ok(createdUser);
+    }
 
     @GetMapping("/firstname/{firsName}")
     public List<UserDTO> findByFirstName(@PathVariable String firsName){

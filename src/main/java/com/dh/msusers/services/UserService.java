@@ -20,6 +20,14 @@ public class UserService {
 
     //***********************************************************//
 
+    public UserDTO createUser(UserDTO user) {
+        // Realiza cualquier validación o lógica adicional necesaria
+
+
+        // Llama al método createUser del repositorio
+        return userRepository.createUser(user);
+    }
+
     public List<UserDTO> findByFirsName(String firsName){
         return userRepository.findByFirName(firsName);
 
