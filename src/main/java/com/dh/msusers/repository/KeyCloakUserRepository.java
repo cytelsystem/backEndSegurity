@@ -46,7 +46,6 @@ public class KeyCloakUserRepository implements IUserRepository{
         List<UserRepresentation> users = keycloakClient.realm(realm).users().list();
         return users.stream().map(this::toUser).collect(Collectors.toList());
 
-        keycloakClient.realm(realm).users().
 
     }
 
