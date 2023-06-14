@@ -22,6 +22,12 @@ public class UserRestController {
         return ResponseEntity.ok(createdUser);
     }
 
+
+    @GetMapping("/todos")
+    public List<UserDTO> getAllUsers() {
+        return UserService.getAllUsers();
+    }
+
     @GetMapping("/firstname/{firsName}")
     public List<UserDTO> findByFirstName(@PathVariable String firsName){
 

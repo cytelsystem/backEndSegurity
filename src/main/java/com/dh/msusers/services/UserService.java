@@ -28,6 +28,10 @@ public class UserService {
         return userRepository.createUser(user);
     }
 
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAllUsers();
+    }
+
     public List<UserDTO> findByFirsName(String firsName){
         return userRepository.findByFirName(firsName);
 

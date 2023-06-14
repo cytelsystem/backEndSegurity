@@ -8,6 +8,8 @@ import java.util.List;
 @Repository
 public interface IUserRepository {
 
+    public List<UserDTO> findAllUsers();
+
     public List<UserDTO> findByFirName(String name);
 
     public UserDTO findById(String id);

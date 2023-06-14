@@ -48,6 +48,12 @@ public class KeyCloakUserRepository implements IUserRepository{
         return toUser(newUser);
     }
 
+    @Override
+    public List<UserDTO> findAllUsers() {
+        List<UserRepresentation> users = keycloakClient.realm(realm).users().list();
+        return users.stream().map(this::toUser).collect(Collectors.toList());
+    }
+
 
     @Override
     public List<UserDTO> findByFirName(String name) {
