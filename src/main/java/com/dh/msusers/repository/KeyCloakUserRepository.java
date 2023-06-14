@@ -25,13 +25,6 @@ public class KeyCloakUserRepository implements IUserRepository{
 
     //******************Metodos Implementados de la interface***********************//
 
-    public void createRealm(String realmName) {
-        RealmRepresentation realm = new RealmRepresentation();
-        realm.setRealm(realmName);
-        realm.setEnabled(true);
-        keycloakClient.realms().create(realm);
-    }
-
     @Override
     public UserDTO createUser(UserDTO user) {
         UserRepresentation newUser = new UserRepresentation();
@@ -52,6 +45,9 @@ public class KeyCloakUserRepository implements IUserRepository{
     public List<UserDTO> findAllUsers() {
         List<UserRepresentation> users = keycloakClient.realm(realm).users().list();
         return users.stream().map(this::toUser).collect(Collectors.toList());
+
+        keycloakClient.realm(realm).users().
+
     }
 
 
@@ -91,7 +87,12 @@ public class KeyCloakUserRepository implements IUserRepository{
             e.printStackTrace();
         }
 
-        return new UserDTO(UserRepresentation.getId(),UserRepresentation.getUsername(),UserRepresentation.getEmail(),UserRepresentation.getFirstName(),nationality);
+        return new UserDTO(
+                UserRepresentation.getId(),
+                UserRepresentation.getUsername(),
+                UserRepresentation.getEmail(),
+                UserRepresentation.getFirstName(),
+                nationality);
     }
 
 

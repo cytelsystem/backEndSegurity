@@ -7,13 +7,14 @@ public class UserDTO {
     private String firstName;
     private String nationality;
 
+
     //*********************************Constructor*************************************//
 
-    public UserDTO(String id, String username, String email, String firtName, String nationality) {
+    public UserDTO(String id, String username, String email, String firstName, String nationality) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.firstName = firtName;
+        this.firstName = firstName;
         this.nationality = nationality;
     }
 
