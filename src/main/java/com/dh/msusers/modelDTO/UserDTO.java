@@ -1,5 +1,8 @@
 package com.dh.msusers.modelDTO;
 
+import java.util.List;
+import java.util.Map;
+
 public class UserDTO {
     private String id;
     private String username;
@@ -16,6 +19,10 @@ public class UserDTO {
         this.email = email;
         this.firstName = firstName;
         this.nationality = nationality;
+    }
+
+    public UserDTO() {
+
     }
 
 
