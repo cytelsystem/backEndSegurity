@@ -43,9 +43,9 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
     public void run(String... args) {
 
         UserDTO userDTO = new UserDTO();
-        userDTO.setUsername("exampleUser");
-        userDTO.setEmail("example@example.com");
-        userDTO.setFirstName("John");
+        userDTO.setUsername("intadmin");
+        userDTO.setEmail("intadmin@example.com");
+        userDTO.setFirstName("Hector");
 
 
 //        UserDTO createdUser = UserService.createUser(userDTO);

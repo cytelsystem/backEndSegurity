@@ -3,12 +3,14 @@ package com.dh.msusers.repository;
 import com.dh.msusers.modelDTO.UserDTO;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.UserResource;
+import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RealmRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +33,29 @@ public class KeyCloakUserRepository implements IUserRepository{
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
         newUser.setFirstName(user.getFirstName());
+        newUser.setEnabled(true);
+        CredentialRepresentation credential = new CredentialRepresentation();
+        credential.setType(CredentialRepresentation.PASSWORD);
+        credential.setValue("password");
+        credential.setTemporary(false);
+        newUser.setCredentials(Arrays.asList(credential));
+
 
 
         // Establecer otros atributos necesarios para el usuario
+
+//        RealmResource realmResource = keycloak.realm("cytelsystem");
+//        UsersResource usersResource = realmResource.users();
+//        UserRepresentation user = new UserRepresentation();
+
+//        user.setUsername("intadmin");
+//        user.setEnabled(true);
+//        CredentialRepresentation credential = new CredentialRepresentation();
+//        credential.setType(CredentialRepresentation.PASSWORD);
+//        credential.setValue("password");
+//        credential.setTemporary(false);
+//        user.setCredentials(Arrays.asList(credential));
+//        usersResource.create(user);
 
         keycloak.realm(realm).users().create(newUser);
 
@@ -78,21 +100,23 @@ public class KeyCloakUserRepository implements IUserRepository{
 
     //**********************************************************************************
 
-    private UserDTO toUser(UserRepresentation UserRepresentation){
+    private UserDTO toUser(UserRepresentation userRepresentation) {
         String nationality = null;
-        try {
-            nationality = UserRepresentation.getAttributes().get("nacionalidad").get(0);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (userRepresentation != null && userRepresentation.getAttributes() != null) {
+            List<String> nationalityList = userRepresentation.getAttributes().get("nacionalidad");
+            if (nationalityList != null && !nationalityList.isEmpty()) {
+                nationality = nationalityList.get(0);
+            }
         }
 
         return new UserDTO(
-                UserRepresentation.getId(),
-                UserRepresentation.getUsername(),
-                UserRepresentation.getEmail(),
-                UserRepresentation.getFirstName(),
+                userRepresentation.getId(),
+                userRepresentation.getUsername(),
+                userRepresentation.getEmail(),
+                userRepresentation.getFirstName(),
                 nationality);
     }
+
 
 
 }
