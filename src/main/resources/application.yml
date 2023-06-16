@@ -14,8 +14,13 @@ server:
 dh:
     keycloak:
         auth-server-url: http://localhost:8080
-    #    realm: master
-    #    username: admin
-    #    password: admin
-    #    client-id: admin-cli
-    #    client-secret: EjxBmhxn665tsv0nchzOzoKfS9VhRQDc
+    master:
+        realm: master
+        username: admin
+        password: admin
+        clientId: admin-cli
+    nuevoReino:
+        realm: cytelsystem
+        new_username: intadmin
+        new_password: password
+        new_realm_roles: USER

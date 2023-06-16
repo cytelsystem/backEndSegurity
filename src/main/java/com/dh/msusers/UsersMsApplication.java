@@ -17,24 +17,5 @@ public class UsersMsApplication {
 		SpringApplication.run(UsersMsApplication.class, args);
 	}
 
-	@Value("${dh.keycloak.auth-server-url}")
-	private String authServerUrl;
-
-
-	@Bean
-	public Keycloak keycloak() {
-		return KeycloakBuilder.builder()
-		.serverUrl(authServerUrl)
-		.realm("master")
-		.username("admin")
-		.password("admin")
-		.clientId("admin-cli")
-		.build();
-
-	}
-
-
-
-
 
 }
