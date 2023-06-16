@@ -1,0 +1,40 @@
+
+#server.port=8084
+#
+#dh.keycloak.serverUrl=http://localhost:8080
+#dh.keycloak.realm = digital-house
+#dh.keycloak.clientId = interno
+#dh.keycloak.clientSecret = hfIIlnFD2MUPQOFA8k7jKW4XEALEkLJs
+
+server:
+    port: 8084
+
+#dh:
+#    keycloak:
+#        serverUrl: http://localhost:8080/
+#        realm: master
+#        clientId: clickAdmin
+#        clientSecret: EjxBmhxn665tsv0nchzOzoKfS9VhRQDc
+
+
+#
+#spring:
+#    keycloak:
+#        auth-server-url: http://localhost:8080/auth
+#        realm: master
+#        resource: admin-cli
+#        credentials:
+#            secret: gyZo3wKTf4Wcxw8eTNCawOnDYI6GrGa3
+#        ssl-required: external
+#        use-resource-role-mappings: true
+#        bearer-only: true
+
+
+dh:
+    keycloak:
+        auth-server-url: http://localhost:8080
+    #    realm: master
+    #    username: admin
+    #    password: admin
+    #    client-id: admin-cli
+    #    client-secret: EjxBmhxn665tsv0nchzOzoKfS9VhRQDc
