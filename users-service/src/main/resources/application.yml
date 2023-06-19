@@ -1,0 +1,20 @@
+server:
+  port: 8086
+
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/dh
+        registration:
+          keycloak:
+            client-id: backend
+            client-secret: CaZ4vUhbOAUuCKBV2rmVF4aUzlDpngz3
+            redirect-uri: http://localhost:9090/login/oauth2/code/keycloak
+
+
+#            redirect-uri: https://oauth.pstmn.io/v1/callback
+
