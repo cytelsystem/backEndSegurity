@@ -143,18 +143,21 @@ public class KeyCloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
     objectMapper.registerModule(new JavaTimeModule());
 
     // Extrae los roles de los recursos
-    resourcesRoles.addAll(extractRoles("resource_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+//    resourcesRoles.addAll(extractRoles("resource_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
     // Extrae los roles del acceso al reino (realm_access)
-    resourcesRoles.addAll(extractRolesRealmAccess("realm_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+//    resourcesRoles.addAll(extractRolesRealmAccess("realm_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
     // Extrae los valores de aud (audiencia)
-    resourcesRoles.addAll(extractAud("aud", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+//    resourcesRoles.addAll(extractAud("aud", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
     // Extrae los grupos
-    resourcesRoles.addAll(extractGroups("groups", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+    resourcesRoles.addAll(extractGroups("group", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+
+
 
     System.out.println("------------------------------------------------------");
     resourcesRoles.forEach(grantedAuthority -> {
       System.out.println(grantedAuthority.getAuthority());
     });
+
 
     return resourcesRoles;
   }
@@ -194,6 +197,7 @@ public class KeyCloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
 
     return AuthorityUtils.createAuthorityList(groupsWithPrefix.toArray(new String[0]));
   }
+
 
   // Extrae los valores de aud (audiencia)
   private static List<GrantedAuthority> extractAud(String route, JsonNode jwt) {

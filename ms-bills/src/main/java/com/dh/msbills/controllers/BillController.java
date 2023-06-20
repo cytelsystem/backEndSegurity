@@ -3,6 +3,7 @@ package com.dh.msbills.controllers;
 import com.dh.msbills.models.Bill;
 import com.dh.msbills.services.BillService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BillController {
 
+    @Autowired
     private final BillService service;
+
+    @GetMapping("/crear")
+    @PreAuthorize("hasAuthority('GROUP_PROVIDERS')")
+    public String hello() {
+        return "hello gateway con yml";
+    }
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_USER')")
