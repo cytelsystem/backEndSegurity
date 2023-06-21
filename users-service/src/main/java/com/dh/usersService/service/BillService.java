@@ -6,6 +6,7 @@ import com.dh.usersService.feignInterface.IFeignMsBills;
 import com.dh.usersService.model.Bill;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,9 +26,10 @@ public class BillService {
 //        return respuesta;
 //    }
 
-    public List<Bill> getAllBill() {
 
-        return (List<Bill>) IFeignMsBills.getAll();
+    public List<Bill> getAll() {
+
+        return IFeignMsBills.getAll().getBody();
     }
 
 }

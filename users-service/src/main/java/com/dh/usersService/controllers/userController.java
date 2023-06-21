@@ -26,10 +26,16 @@ public class userController {
     return "hello gateway con yml";
   }
 
+//  @GetMapping("/all")
+//  public ResponseEntity<List<Bill>> getAll() {
+//
+//    return ResponseEntity.ok().body(IFeignMsBills.getAll().getBody());
+//  }
+
   @GetMapping("/all")
   public ResponseEntity<List<Bill>> getAll() {
 
-    return ResponseEntity.ok().body(IFeignMsBills.getAll().getBody());
+    return ResponseEntity.ok().body(BillService.getAll());
   }
 
 
