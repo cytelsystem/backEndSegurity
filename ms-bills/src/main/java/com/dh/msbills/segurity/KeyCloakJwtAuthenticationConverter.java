@@ -143,11 +143,11 @@ public class KeyCloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
     objectMapper.registerModule(new JavaTimeModule());
 
     // Extrae los roles de los recursos
-//    resourcesRoles.addAll(extractRoles("resource_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+    resourcesRoles.addAll(extractRoles("resource_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
     // Extrae los roles del acceso al reino (realm_access)
-//    resourcesRoles.addAll(extractRolesRealmAccess("realm_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+    resourcesRoles.addAll(extractRolesRealmAccess("realm_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
     // Extrae los valores de aud (audiencia)
-//    resourcesRoles.addAll(extractAud("aud", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+    resourcesRoles.addAll(extractAud("aud", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
     // Extrae los grupos
     resourcesRoles.addAll(extractGroups("group", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
 

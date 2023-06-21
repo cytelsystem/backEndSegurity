@@ -25,6 +25,11 @@ spring.cloud.gateway:
       uri: http://localhost:8086
       predicates:
         - Path=/hello/**
+    - id: ms-bill
+      uri: http://localhost:8087
+      predicates:
+        - Path=/bills/**
+
 
 
 

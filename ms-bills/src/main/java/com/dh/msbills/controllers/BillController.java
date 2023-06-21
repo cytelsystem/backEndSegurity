@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,16 +21,32 @@ public class BillController {
     @Autowired
     private final BillService service;
 
+//    @GetMapping("/crear")
+//    @PreAuthorize("hasAuthority('GROUP_PROVIDERS')")
+//    public String hello() {
+//        return "hello gateway con yml";
+//    }
+
     @GetMapping("/crear")
     @PreAuthorize("hasAuthority('GROUP_PROVIDERS')")
-    public String hello() {
-        return "hello gateway con yml";
+    public ResponseEntity<String> crear(@RequestBody Bill o){
+        ResponseEntity<String> respuesta = null;
+
+        if(service.guardar(o) != null){
+            respuesta = ResponseEntity.ok("El Registro fue creado con Exito");
+        }else{
+            respuesta = ResponseEntity.internalServerError().body("Ooops");
+        }
+
+        return respuesta;
     }
+
+
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<List<Bill>> getAll() {
-        return ResponseEntity.ok().body(service.getAllBill());
+                return ResponseEntity.ok().body(service.getAllBill());
     }
 
     @GetMapping("/all1")

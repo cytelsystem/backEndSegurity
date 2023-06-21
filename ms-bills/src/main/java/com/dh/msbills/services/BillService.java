@@ -13,8 +13,15 @@ public class BillService {
 
     private final BillRepository repository;
 
+    public String guardar(Bill o){
+        String respuesta = null;
+        if (repository.save(o) != null){
+            respuesta = "ok";
+        }
+        return respuesta;
+    }
+
     public List<Bill> getAllBill() {
-        return
-                repository.findAll();
+        return repository.findAll();
     }
 }
