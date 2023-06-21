@@ -1,7 +1,6 @@
 server:
   port: 8086
 
-
 spring:
   security:
     oauth2:
