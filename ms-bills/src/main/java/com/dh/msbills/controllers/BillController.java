@@ -24,6 +24,11 @@ public class BillController {
 //        return "hello gateway con yml";
 //    }
 
+    @GetMapping()
+    public String hello() {
+        return "hello gateway con yml";
+    }
+
 
     @PostMapping("/crear")
     @PreAuthorize("hasAuthority('GROUP_PROVIDERS')")
