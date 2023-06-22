@@ -17,3 +17,16 @@ spring:
 
 #            redirect-uri: https://oauth.pstmn.io/v1/callback
 
+dh:
+  keycloak:
+    auth-server-url: http://localhost:8080
+  master:
+    realm: master
+    username: admin
+    password: admin
+    clientId: admin-cli
+  nuevoReino:
+    realm: dh
+    new_username: user
+    new_password: password
+    new_realm_roles: USER
