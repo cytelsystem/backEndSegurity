@@ -59,4 +59,11 @@ public class BillController {
         return "Only for User role";
     }
 
+
+    @GetMapping("/facturasId")
+    public ResponseEntity<List<Bill>> billxid(@RequestParam String customerBill){
+        return ResponseEntity.ok().body(service.findByidBill(customerBill));
+    }
+
+
 }

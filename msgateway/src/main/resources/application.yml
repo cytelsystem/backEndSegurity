@@ -23,7 +23,7 @@ spring.cloud.gateway:
   default-filters:
     - TokenRelay
   routes:
-    - id: hello-service
+    - id: user-service
       uri: http://localhost:8086
       predicates:
         - Path=/users/**
@@ -32,6 +32,19 @@ spring.cloud.gateway:
       predicates:
         - Path=/bills/**
 
-
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceURL:
+      defaultZone: http://localhost:8761/eureka
+  management:
+    endpoint:
+      gateway:
+        enabled: true
+    endpoints:
+      web:
+        exposure:
+          include: gateway
 
 
