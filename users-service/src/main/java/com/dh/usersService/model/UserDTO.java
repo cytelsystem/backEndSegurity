@@ -1,7 +1,11 @@
 package com.dh.usersService.model;
 
+import lombok.*;
+
 import java.util.List;
 import java.util.Map;
+
+
 
 public class UserDTO {
     private String id;
@@ -9,9 +13,7 @@ public class UserDTO {
     private String email;
     private String firstName;
     private String nationality;
-
-
-    //*********************************Constructor*************************************//
+    private List<Bill> bills;
 
     public UserDTO(String id, String username, String email, String firstName, String nationality) {
         this.id = id;
@@ -20,13 +22,6 @@ public class UserDTO {
         this.firstName = firstName;
         this.nationality = nationality;
     }
-
-    public UserDTO() {
-
-    }
-
-
-    //*********************************Getter y Setter*************************************//
 
     public String getId() {
         return id;
@@ -68,8 +63,11 @@ public class UserDTO {
         this.nationality = nationality;
     }
 
+    public List<Bill> getBills() {
+        return bills;
+    }
 
-    //**************************************************************************************//
-
-
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
+    }
 }

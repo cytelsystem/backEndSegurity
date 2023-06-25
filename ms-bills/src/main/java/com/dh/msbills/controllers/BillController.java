@@ -65,5 +65,11 @@ public class BillController {
         return ResponseEntity.ok().body(service.findByidBill(customerBill));
     }
 
+    @GetMapping("/findBillsById")
+    public ResponseEntity<List<Bill>> findByidBill(@RequestParam String idBill) {
+        return ResponseEntity.ok().body(service.findByidBill(idBill));
+    }
+
+
 
 }

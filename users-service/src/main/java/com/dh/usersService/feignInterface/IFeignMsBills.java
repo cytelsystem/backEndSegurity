@@ -13,13 +13,14 @@ import java.util.List;
 @FeignClient(name= "ms-bill",url = "http://localhost:8087", configuration = FeignInterceptor.class)
 public interface IFeignMsBills {
 
-//    @RequestMapping(method = RequestMethod.GET,value = "/subscription/find")
-//    ResponseEntity<SubscriptionDTO> findByUserId(@RequestParam Integer userId);
-
     @RequestMapping(method = RequestMethod.GET,value = "/bills/crear")
     ResponseEntity<String> crear(@RequestBody Bill o);
 
     @RequestMapping(method = RequestMethod.GET,value = "/bills/all")
     ResponseEntity<List<Bill>> getAll();
+
+
+    @RequestMapping(method = RequestMethod.GET,value = "/bills/facturasId")
+    ResponseEntity<List<Bill>> findByidBill(@RequestParam String customerBill);
 
 }

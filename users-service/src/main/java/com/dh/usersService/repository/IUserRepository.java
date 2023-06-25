@@ -15,6 +15,8 @@ public interface IUserRepository {
 
     public UserDTO findById(String id);
 
+//    public UserBillsDTO findBillsUserById(String id);
+
     public UserDTO updateNationality(String id, String nationality);
 
     public UserDTO createUser(UserDTO user);
