@@ -33,3 +33,6 @@ public class OAuth2ResourceServerSecurityConfiguration {
         return NimbusJwtDecoder.withJwkSetUri("http://localhost:8080/realms/dh/protocol/openid-connect/certs").build();
     }
 }
+
+
+

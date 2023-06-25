@@ -8,6 +8,7 @@ import com.dh.usersService.model.UserDTO;
 import com.dh.usersService.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +43,14 @@ public class BillService {
         user.setBills(bills);
 
         return user;
+    }
+
+    public ResponseEntity<String> guardar(Bill o){
+
+
+      return IFeignMsBills.crear(o);
+
+
     }
 
 

@@ -23,4 +23,6 @@ public interface IFeignMsBills {
     @RequestMapping(method = RequestMethod.GET,value = "/bills/facturasId")
     ResponseEntity<List<Bill>> findByidBill(@RequestParam String customerBill);
 
+
+
 }

@@ -7,6 +7,7 @@ import com.dh.usersService.model.UserDTO;
 import com.dh.usersService.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -42,6 +43,12 @@ public class userController {
   @GetMapping("/facturas/{idBill}")
   public ResponseEntity<List<UserDTO>> getAllfacturasbyuser(@PathVariable String idBill) {
     return ResponseEntity.ok().body(Collections.singletonList(BillService.findUserBillsById(idBill)));
+  }
+
+  @PostMapping("/crear")
+  public ResponseEntity<String> crear(@RequestBody Bill o){
+
+    return BillService.guardar(o);
   }
 
 
