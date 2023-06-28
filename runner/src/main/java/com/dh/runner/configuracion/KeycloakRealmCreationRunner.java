@@ -83,7 +83,7 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         "api-gateway-client",
         true,
         "client-secret",
-        "vj4VpqGp8CKru6rRORf6DANrF3FFVX1C",
+        "toDBMTqzwxJsCd14cYL883YphnTcdgcb",
         true,
         false,
         true,
