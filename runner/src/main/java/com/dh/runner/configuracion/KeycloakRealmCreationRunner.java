@@ -6,19 +6,24 @@ import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.*;
 import org.keycloak.representations.idm.*;
 import org.keycloak.representations.idm.authorization.ScopeRepresentation;
+import org.keycloak.util.JsonSerialization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.stereotype.Component;
 
 
 
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.*;
+
+import static org.keycloak.OAuth2Constants.CLIENT_ID;
 
 @Component
 public class KeycloakRealmCreationRunner implements CommandLineRunner {
@@ -58,16 +63,23 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
     //**********************************************************************************//
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws IOException {
 
-        createRealm();
+//        createRealm();
+
 //        createRealmRole();
-        createUser();
+
+//        createUser();
+
 //        createClientScope();
 //        createClientScopeMapper();
-        createGroup();
-        addClientScopeMapper();
-        addUserToGroup();
+
+//        createGroup();
+//        addClientScopeMapper();
+//        addUserToGroup();
+        crwateclienmte();
+
+        clienteGet();
 
 
     }
@@ -170,22 +182,7 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 
 
 
-    private ProtocolMapperRepresentation createProtocolMapper() {
-        ProtocolMapperRepresentation mapper = new ProtocolMapperRepresentation();
-        mapper.setName(mapperName);
-        mapper.setProtocol("openid-connect");
-        mapper.setProtocolMapper(mapperType);
 
-        Map<String, String> config = new HashMap<>();
-        config.put("claim.name", "testgroups");
-        config.put("full.path", "false");
-        config.put("id.token.claim", "true");
-        config.put("access.token.claim", "true");
-        config.put("userinfo.token.claim", "false");
-        mapper.setConfig(config);
-
-        return mapper;
-    }
 
 
 
@@ -226,8 +223,119 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 
 
 
+    private ProtocolMapperRepresentation createProtocolMapper() {
+        ProtocolMapperRepresentation mapper = new ProtocolMapperRepresentation();
+        mapper.setName(mapperName);
+        mapper.setProtocol("openid-connect");
+        mapper.setProtocolMapper(mapperType);
+
+        Map<String, String> config = new HashMap<>();
+        config.put("claim.name", "testgroups");
+        config.put("full.path", "false");
+        config.put("id.token.claim", "true");
+        config.put("access.token.claim", "true");
+        config.put("userinfo.token.claim", "false");
+        mapper.setConfig(config);
+
+        return mapper;
+    }
+
+
+
+    private void crwateclienmte(){
+        RealmResource realmResource = keycloak.realm(realm);
+        ClientsResource clientsResource = realmResource.clients();
+        ClientRepresentation ClientRepresentation = new ClientRepresentation();
+
+        ClientRepresentation.setClientId("backend");
+        ClientRepresentation.setEnabled(true);
+        ClientRepresentation.setClientAuthenticatorType("client-secret");
+        ClientRepresentation.setSecret("KAQ2TwfttuFl4HITI3VY29xgIMgV0Tbcjavier");
+        ClientRepresentation.setServiceAccountsEnabled(true);
+        ClientRepresentation.setAuthorizationServicesEnabled(true);
+        ClientRepresentation.setPublicClient(false);
+
+//        ClientRepresentation.setAuthorizationServicesEnabled(true);
+
+        ClientRepresentation.setProtocol("openid-connect");
+
+//        ClientRepresentation.setSecret("COCTQXecEbhb4ls4SG3uCppr254szuUF");
+//        ClientRepresentation.setProtocol("openid-connect");
+
+//        ClientRepresentation.setName("backend");
+//        ClientRepresentation.setClientId("backend");
+//        ClientRepresentation.setProtocol("openid-connect");
+//        ClientRepresentation.setAuthorizationServicesEnabled(true);
+
+//        ClientRepresentation.setServiceAccountsEnabled(true);
+//        ClientRepresentation.setClientAuthenticatorType("client-secret");
+//        ClientRepresentation.setDirectAccessGrantsEnabled(true);
+//        ClientRepresentation.setSecret("52813884");
+//        ClientRepresentation.isPublicClient();
+
+
+
+
+
+
+        clientsResource.create(ClientRepresentation);
+
+    }
+    private void clienteGet() throws IOException {
+
+
+//        ClientRepresentation clientxxx = keycloak.realm(realm).clients().findByClientId("backend").get(0);
+
+//        keycloak.realm(realm).clients().get("backend").toRepresentation().setAuthorizationServicesEnabled(true);
+
+//        keycloak.realm(realm).clients().findByClientId("backend").get(0).setDirectAccessGrantsEnabled(false);
+
+
+
+
+
+
+
+//        keycloak.realm(realm) // obtener el objeto del reino Keycloak
+//                .clients() // obtener la lista de clientes en el reino
+//                .get("backend") // obtener la lista de clientes en el reino
+//                .toRepresentation() // obtener el cliente como una representación
+//                .setAuthorizationServicesEnabled(true); // habilitar los servicios de autorización para el cliente
+
+
+        // Get the realm object for the client
+        RealmResource realmResource = keycloak.realm(realm);
+
+        // Find the client by ID
+        ClientRepresentation clientRepresentation = realmResource.clients().findByClientId("backend").get(0);
+
+        // Set the direct access grant enabled value to false
+//        clientRepresentation.setDirectAccessGrantsEnabled(false);
+        clientRepresentation.setAuthorizationServicesEnabled(false);
+
+        // Update the client using the ClientResource
+        ClientResource clientResource = realmResource.clients().get(clientRepresentation.getId());
+        clientResource.update(clientRepresentation);
+
+        ClientRepresentation clientxxx = keycloak.realm(realm).clients().findByClientId("backend").get(0);
+
+
+        String json = JsonSerialization.writeValueAsString(clientxxx);
+        System.out.println(json);
+
+    }
+
+
+
+
+
 
 
 
 
 }
+
+
+
+
+//******************************************************************************************//
