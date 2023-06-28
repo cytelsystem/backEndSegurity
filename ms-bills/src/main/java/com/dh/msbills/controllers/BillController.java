@@ -19,11 +19,6 @@ public class BillController {
     private final BillService service;
 
 
-//    @GetMapping()
-//    public String hello() {
-//        return "hello gateway con yml";
-//    }
-
 
     @PostMapping("/crear")
     @PreAuthorize("hasAuthority('GROUP_PROVIDERS')")
@@ -39,23 +34,6 @@ public class BillController {
         return respuesta;
     }
 
-//    @GetMapping("/findBillsById")
-//    public ResponseEntity<List<Bill>> findByidBill(@RequestParam String idBill) {
-//        return ResponseEntity.ok().body(service.findByidBill(idBill));
-//    }
-
-
-//    @GetMapping("/all")
-//    @PreAuthorize("hasRole('ROLE_USER')")
-//    public ResponseEntity<List<Bill>> getAll() {
-//                return ResponseEntity.ok().body(service.getAllBill());
-//    }
-
-//    @GetMapping("/all1")
-//    @PreAuthorize("hasRole('ROLE_GUEST')")
-//    public String withRole() {
-//        return "Only for User role";
-//    }
 
 
     @GetMapping("/facturasId")

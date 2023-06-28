@@ -26,11 +26,6 @@ public class BillService {
     }
 
 
-//    public List<Bill> findByCustomerId(String customerId) {
-//
-//        return repository.findByCustomerId(customerId);
-//    }
-
     public List<Bill> findByidBill(String idBill) {
         return repository.findByidBill(idBill);
     }

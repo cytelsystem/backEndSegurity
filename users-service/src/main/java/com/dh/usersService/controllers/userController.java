@@ -22,34 +22,12 @@ public class userController {
   @Autowired
   private IFeignMsBills IFeignMsBills;
 
-  @GetMapping("/user")
-  public String hello() {
-    return "hello gateway con yml";
-  }
-
-//  @GetMapping("/all")
-//  public ResponseEntity<List<Bill>> getAll() {
-//
-//    return ResponseEntity.ok().body(IFeignMsBills.getAll().getBody());
-//  }
-
-//  @GetMapping("/all")
-//  public ResponseEntity<List<Bill>> getAll() {
-//
-//    return ResponseEntity.ok().body(BillService.getAll());
-//  }
 
 
   @GetMapping("/facturas/{idBill}")
   public ResponseEntity<List<UserDTO>> getAllfacturasbyuser(@PathVariable String idBill) {
     return ResponseEntity.ok().body(Collections.singletonList(BillService.findUserBillsById(idBill)));
   }
-
-//  @PostMapping("/crear")
-//  public ResponseEntity<String> crear(@RequestBody Bill o){
-//
-//    return BillService.guardar(o);
-//  }
 
 
 

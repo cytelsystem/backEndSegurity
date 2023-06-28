@@ -1,7 +1,7 @@
 
 # Reino en keycloak llamado dh
 
-## en el pom la version de spring-boot debe se <version>2.6.7</version>
+## en el pom la version de spring-boot debe se <version>3.0.7</version>
 
 
 ## Configuracion application.properties microservicio

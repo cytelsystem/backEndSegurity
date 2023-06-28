@@ -7,14 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 
-//public interface BillRepository extends JpaRepository<Bill, String> {
-//
-//    List<Bill> findByCustomerId(String customerId);
-//
-//}
 
 public interface BillRepository extends JpaRepository<Bill, String> {
-//    List<Bill> findByidBill(String idBill);
 
     @Query("SELECT b FROM Bill b WHERE b.customerBill = :idBill")
     List<Bill> findByidBill(String idBill);

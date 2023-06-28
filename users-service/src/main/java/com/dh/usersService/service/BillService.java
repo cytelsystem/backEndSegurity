@@ -23,19 +23,7 @@ public class BillService {
     @Autowired
     private IUserRepository IUserRepository;
 
-//    public String guardar(Bill o){
-//        String respuesta = null;
-//        if (repository.save(o) != null){
-//            respuesta = "ok";
-//        }
-//        return respuesta;
-//    }
 
-
-//    public List<Bill> getAll() {
-//
-//        return IFeignMsBills.getAll().getBody();
-//    }
 
     public UserDTO findUserBillsById(String id){
         List<Bill> bills = IFeignMsBills.findByidBill(id).getBody();
@@ -45,13 +33,7 @@ public class BillService {
         return user;
     }
 
-//    public ResponseEntity<String> guardar(Bill o){
-//
-//
-//      return IFeignMsBills.crear(o);
-//
-//
-//    }
+
 
 
 }
