@@ -77,9 +77,48 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 //        createGroup();
 //        addClientScopeMapper();
 //        addUserToGroup();
-        crwateclienmte();
 
-        clienteGet();
+        createClientIDGateway(
+        "api-gateway-client",
+        "api-gateway-client",
+        true,
+        "client-secret",
+        "vj4VpqGp8CKru6rRORf6DANrF3FFVX1C",
+        true,
+        false,
+        false,
+        false,
+        "openid-connect"
+
+        );
+
+        createClientIDBackEnd(
+                "backend",
+                "backend",
+                true,
+                "client-secret",
+                "CaZ4vUhbOAUuCKBV2rmVF4aUzlDpngz3",
+                true,
+                false,
+                false,
+                false,
+                "openid-connect"
+
+        );
+
+        createClientIDBills(
+                "billsClient",
+                "billsClient",
+                true,
+                "client-secret",
+                "D5XMwh0Se35XdFxI839xqdLTMxQ8JtEG",
+                true,
+                false,
+                false,
+                false,
+                "openid-connect"
+
+        );
 
 
     }
@@ -179,14 +218,6 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 
 
 
-
-
-
-
-
-
-
-
     private void addClientScopeMapper() {
 
         ClientScopeRepresentation clientScopeResource = keycloak.realm(realm).clientScopes().findAll().stream().filter(clientScope -> clientScope.getName().equals("roles")).findFirst().get();
@@ -240,47 +271,152 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         return mapper;
     }
 
+    //***************************************************ClientGateWay************************************************************//
+
+    private void createClientIDGateway(
+            String setClientId,
+            String setName,
+            boolean setEnabled,
+            String setClientAuthenticatorType,
+            String setSecret,
+            boolean setServiceAccountsEnabled,
+            boolean setAuthorizationServicesEnabled,
+            boolean setDirectAccessGrantsEnabled,
+            boolean setPublicClient,
+            String setProtocol
 
 
-    private void crwateclienmte(){
+
+    )
+    {
         RealmResource realmResource = keycloak.realm(realm);
         ClientsResource clientsResource = realmResource.clients();
         ClientRepresentation ClientRepresentation = new ClientRepresentation();
 
-        ClientRepresentation.setClientId("backend");
-        ClientRepresentation.setEnabled(true);
-        ClientRepresentation.setClientAuthenticatorType("client-secret");
-        ClientRepresentation.setSecret("KAQ2TwfttuFl4HITI3VY29xgIMgV0Tbcjavier");
-        ClientRepresentation.setServiceAccountsEnabled(true);
-        ClientRepresentation.setAuthorizationServicesEnabled(true);
-        ClientRepresentation.setPublicClient(false);
-
-//        ClientRepresentation.setAuthorizationServicesEnabled(true);
-
-        ClientRepresentation.setProtocol("openid-connect");
-
-//        ClientRepresentation.setSecret("COCTQXecEbhb4ls4SG3uCppr254szuUF");
-//        ClientRepresentation.setProtocol("openid-connect");
-
-//        ClientRepresentation.setName("backend");
-//        ClientRepresentation.setClientId("backend");
-//        ClientRepresentation.setProtocol("openid-connect");
-//        ClientRepresentation.setAuthorizationServicesEnabled(true);
-
-//        ClientRepresentation.setServiceAccountsEnabled(true);
-//        ClientRepresentation.setClientAuthenticatorType("client-secret");
-//        ClientRepresentation.setDirectAccessGrantsEnabled(true);
-//        ClientRepresentation.setSecret("52813884");
-//        ClientRepresentation.isPublicClient();
+        //***********************************************************************************//
 
 
+        ClientRepresentation.setClientId(setClientId);
+        ClientRepresentation.setName(setName);
+        ClientRepresentation.setEnabled(setEnabled);
+        ClientRepresentation.setClientAuthenticatorType(setClientAuthenticatorType);
+        ClientRepresentation.setSecret(setSecret);
+        ClientRepresentation.setServiceAccountsEnabled(setServiceAccountsEnabled);
+        ClientRepresentation.setAuthorizationServicesEnabled(setAuthorizationServicesEnabled);
+        ClientRepresentation.setDirectAccessGrantsEnabled(setDirectAccessGrantsEnabled);
+        ClientRepresentation.setPublicClient(setPublicClient);
+        ClientRepresentation.setProtocol(setProtocol);
+        ClientRepresentation.setRootUrl("http://localhost:9090"); /*Root URL */
+        ClientRepresentation.setBaseUrl("http://localhost:9090"); /*Home URL*/
+        ClientRepresentation.setAdminUrl("/."); /*Admin URL*/
 
-
-
+        List<String> uris = List.of("https://example.com/callback1", "https://example.com/callback2");
+        ClientRepresentation.setRedirectUris(uris);
 
         clientsResource.create(ClientRepresentation);
 
     }
+
+
+    //***************************************************ClientBackEnd************************************************************//
+
+    private void createClientIDBackEnd(
+            String setClientId,
+            String setName,
+            boolean setEnabled,
+            String setClientAuthenticatorType,
+            String setSecret,
+            boolean setServiceAccountsEnabled,
+            boolean setAuthorizationServicesEnabled,
+            boolean setDirectAccessGrantsEnabled,
+            boolean setPublicClient,
+            String setProtocol
+
+
+
+    )
+    {
+        RealmResource realmResource = keycloak.realm(realm);
+        ClientsResource clientsResource = realmResource.clients();
+        ClientRepresentation ClientRepresentation = new ClientRepresentation();
+
+        //***********************************************************************************//
+
+
+        ClientRepresentation.setClientId(setClientId);
+        ClientRepresentation.setName(setName);
+        ClientRepresentation.setEnabled(setEnabled);
+        ClientRepresentation.setClientAuthenticatorType(setClientAuthenticatorType);
+        ClientRepresentation.setSecret(setSecret);
+        ClientRepresentation.setServiceAccountsEnabled(setServiceAccountsEnabled);
+        ClientRepresentation.setAuthorizationServicesEnabled(setAuthorizationServicesEnabled);
+        ClientRepresentation.setDirectAccessGrantsEnabled(setDirectAccessGrantsEnabled);
+        ClientRepresentation.setPublicClient(setPublicClient);
+        ClientRepresentation.setProtocol(setProtocol);
+        ClientRepresentation.setRootUrl("http://localhost:8083"); /*Root URL */
+        ClientRepresentation.setBaseUrl("http://localhost:9090"); /*Home URL*/
+        ClientRepresentation.setAdminUrl("/."); /*Admin URL*/
+
+        List<String> uris = List.of("https://example.com/callback1", "https://example.com/callback2");
+        ClientRepresentation.setRedirectUris(uris);
+
+        clientsResource.create(ClientRepresentation);
+
+    }
+
+
+
+    //****************************************************ClientBills************************************************************//
+
+    private void createClientIDBills(
+            String setClientId,
+            String setName,
+            boolean setEnabled,
+            String setClientAuthenticatorType,
+            String setSecret,
+            boolean setServiceAccountsEnabled,
+            boolean setAuthorizationServicesEnabled,
+            boolean setDirectAccessGrantsEnabled,
+            boolean setPublicClient,
+            String setProtocol
+
+
+
+    )
+    {
+        RealmResource realmResource = keycloak.realm(realm);
+        ClientsResource clientsResource = realmResource.clients();
+        ClientRepresentation ClientRepresentation = new ClientRepresentation();
+
+        //***********************************************************************************//
+
+
+        ClientRepresentation.setClientId(setClientId);
+        ClientRepresentation.setName(setName);
+        ClientRepresentation.setEnabled(setEnabled);
+        ClientRepresentation.setClientAuthenticatorType(setClientAuthenticatorType);
+        ClientRepresentation.setSecret(setSecret);
+        ClientRepresentation.setServiceAccountsEnabled(setServiceAccountsEnabled);
+        ClientRepresentation.setAuthorizationServicesEnabled(setAuthorizationServicesEnabled);
+        ClientRepresentation.setDirectAccessGrantsEnabled(setDirectAccessGrantsEnabled);
+        ClientRepresentation.setPublicClient(setPublicClient);
+        ClientRepresentation.setProtocol(setProtocol);
+        ClientRepresentation.setRootUrl("http://localhost:8084"); /*Root URL */
+        ClientRepresentation.setBaseUrl("http://localhost:9090"); /*Home URL*/
+        ClientRepresentation.setAdminUrl("/."); /*Admin URL*/
+
+        List<String> uris = List.of("https://example.com/callback1", "https://example.com/callback2");
+        ClientRepresentation.setRedirectUris(uris);
+
+        clientsResource.create(ClientRepresentation);
+
+    }
+
+
+    //********************************************************************************************************************************//
+
+
+
     private void clienteGet() throws IOException {
 
 
