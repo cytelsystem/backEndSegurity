@@ -17,7 +17,6 @@ spring:
             redirect-uri: http://localhost:9090/login/oauth2/code/keycloak
 
 
-#            redirect-uri: https://oauth.pstmn.io/v1/callback
 
 dh:
   keycloak:

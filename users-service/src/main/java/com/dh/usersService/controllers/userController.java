@@ -33,11 +33,11 @@ public class userController {
 //    return ResponseEntity.ok().body(IFeignMsBills.getAll().getBody());
 //  }
 
-  @GetMapping("/all")
-  public ResponseEntity<List<Bill>> getAll() {
-
-    return ResponseEntity.ok().body(BillService.getAll());
-  }
+//  @GetMapping("/all")
+//  public ResponseEntity<List<Bill>> getAll() {
+//
+//    return ResponseEntity.ok().body(BillService.getAll());
+//  }
 
 
   @GetMapping("/facturas/{idBill}")
@@ -45,11 +45,11 @@ public class userController {
     return ResponseEntity.ok().body(Collections.singletonList(BillService.findUserBillsById(idBill)));
   }
 
-  @PostMapping("/crear")
-  public ResponseEntity<String> crear(@RequestBody Bill o){
-
-    return BillService.guardar(o);
-  }
+//  @PostMapping("/crear")
+//  public ResponseEntity<String> crear(@RequestBody Bill o){
+//
+//    return BillService.guardar(o);
+//  }
 
 
 

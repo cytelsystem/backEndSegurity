@@ -32,10 +32,10 @@ public class BillService {
 //    }
 
 
-    public List<Bill> getAll() {
-
-        return IFeignMsBills.getAll().getBody();
-    }
+//    public List<Bill> getAll() {
+//
+//        return IFeignMsBills.getAll().getBody();
+//    }
 
     public UserDTO findUserBillsById(String id){
         List<Bill> bills = IFeignMsBills.findByidBill(id).getBody();
@@ -45,13 +45,13 @@ public class BillService {
         return user;
     }
 
-    public ResponseEntity<String> guardar(Bill o){
-
-
-      return IFeignMsBills.crear(o);
-
-
-    }
+//    public ResponseEntity<String> guardar(Bill o){
+//
+//
+//      return IFeignMsBills.crear(o);
+//
+//
+//    }
 
 
 }

@@ -10,7 +10,7 @@ dh:
     password: admin
     clientId: admin-cli
   nuevoReino:
-    realm: cytelsystem
+    realm: mercadopagohjm
     new_realm_roles: USER
     new_username1: intadmin
     new_password1: password

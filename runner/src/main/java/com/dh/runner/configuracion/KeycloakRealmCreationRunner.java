@@ -65,18 +65,18 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws IOException {
 
-        createRealm();
+        createRealm(); /*Crear realm mercadopagohjm*/
 
 //        createRealmRole();
 
-        createUser();
+        createUser(); /*Crear usuario intadmin*/
 
-//        createClientScope();
-//        createClientScopeMapper();
+//        createClientScope(); /*Crear un client Scope*/
+//        createClientScopeMapper(); /*Crear un client Scope y adiconarle un mapper*/
 
-        createGroup();
-        addClientScopeMapper();
-        addUserToGroup();
+        createGroup(); /*Crear un grupo personal llamado PROVIDERS*/
+        addClientScopeMapper(); /*Adicionar el grupo PROVIDERS al scope roles*/
+        addUserToGroup(); /*Adicionar el usuario intadmin al grupo PROVIDERS*/
 
         createClientIDGateway(
         "api-gateway-client",
@@ -198,7 +198,7 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 
 
         mapper.setConfig(new HashMap<>());
-        mapper.getConfig().put("claim.name", "testgroups");
+        mapper.getConfig().put("claim.name", "group");
         mapper.getConfig().put("full.path", "false");
         mapper.getConfig().put("id.token.claim", "true");
         mapper.getConfig().put("access.token.claim", "true");
@@ -261,7 +261,7 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         mapper.setProtocolMapper(mapperType);
 
         Map<String, String> config = new HashMap<>();
-        config.put("claim.name", "testgroups");
+        config.put("claim.name", "group");
         config.put("full.path", "false");
         config.put("id.token.claim", "true");
         config.put("access.token.claim", "true");
