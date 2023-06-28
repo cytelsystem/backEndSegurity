@@ -11,11 +11,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+
+
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*;
 
 @Component
 public class KeycloakRealmCreationRunner implements CommandLineRunner {
@@ -45,15 +48,24 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
     private String clientScopeName;
 
 
+    private final String mapperName = "GroupPersonales";
+    private final String mapperType = "oidc-group-membership-mapper";
+    private final String scopete = "roles";
+    private final boolean addToIdToken = true;
+    private final boolean addToAccessToken = true;
+
+
     //**********************************************************************************//
 
     @Override
     public void run(String... args) {
 
         createRealm();
-        createRealmRole();
+//        createRealmRole();
         createUser();
-        createClientScope();
+//        createClientScope();
+//        createClientScopeMapper();
+        createClientScopeMapperxxxx();
 
 
     }
@@ -110,12 +122,101 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         attributes.put("type", "default");
         clientScopeRepresentation.setAttributes(attributes);
 
-//        ScopeRepresentation scopeRepresentation = new ScopeRepresentation();
-//        scopeRepresentation.setName("grupos");
-//        scopeRepresentation.setDisplayName("Grupos");
-//        clientScopeResource.addScope(scopeRepresentation);
-//        System.out.println("Scope 'grupos' agregado exitosamente al Client Scope.");
+
     }
+
+
+    private void createClientScopeMapper() {
+        RealmResource realmResource = keycloak.realm(realm);
+        ClientScopeRepresentation clientScopeRepresentation = new ClientScopeRepresentation();
+        clientScopeRepresentation.setName("clienteScopeMapperHJM");
+        clientScopeRepresentation.setProtocol("openid-connect");
+        clientScopeRepresentation.setAttributes(Collections.emptyMap());
+
+        Map<String, String> attributes = new HashMap<>();
+        attributes.put("type", "default");
+        clientScopeRepresentation.setAttributes(attributes);
+
+        ProtocolMapperRepresentation mapper = new ProtocolMapperRepresentation();
+        mapper.setName(mapperName);
+        mapper.setProtocol("openid-connect");
+        mapper.setProtocolMapper(mapperType);
+
+
+        mapper.setConfig(new HashMap<>());
+        mapper.getConfig().put("claim.name", "testgroups");
+        mapper.getConfig().put("full.path", "false");
+        mapper.getConfig().put("id.token.claim", "true");
+        mapper.getConfig().put("access.token.claim", "true");
+        mapper.getConfig().put("userinfo.token.claim", "false");
+
+
+        clientScopeRepresentation.setProtocolMappers(Collections.singletonList(mapper));
+
+
+        Response clientScopeResource = realmResource.clientScopes().create(clientScopeRepresentation);
+
+        System.out.println("Client Scope " + "clienteScopeMapperHJM" + " creado exitosamente.");
+
+
+    }
+
+
+
+
+
+
+
+    private ProtocolMapperRepresentation createProtocolMapper() {
+        ProtocolMapperRepresentation mapper = new ProtocolMapperRepresentation();
+        mapper.setName(mapperName);
+        mapper.setProtocol("openid-connect");
+        mapper.setProtocolMapper(mapperType);
+
+        Map<String, String> config = new HashMap<>();
+        config.put("claim.name", "testgroups");
+        config.put("full.path", "false");
+        config.put("id.token.claim", "true");
+        config.put("access.token.claim", "true");
+        config.put("userinfo.token.claim", "false");
+        mapper.setConfig(config);
+
+        return mapper;
+    }
+
+
+
+
+    private void createClientScopeMapperxxxx() {
+
+        ClientScopeRepresentation clientScopeResource = keycloak.realm(realm).clientScopes().findAll().stream().filter(clientScope -> clientScope.getName().equals("roles")).findFirst().get();
+
+        if (clientScopeResource != null) {
+            // Crear el mapper
+            ProtocolMapperRepresentation mapper = new ProtocolMapperRepresentation();
+            mapper.setName(mapperName);
+            mapper.setProtocol("openid-connect");
+            mapper.setProtocolMapper(mapperType);
+
+            mapper.setConfig(new HashMap<>());
+            mapper.getConfig().put("claim.name", "testgroups");
+            mapper.getConfig().put("full.path", "false");
+            mapper.getConfig().put("id.token.claim", "true");
+            mapper.getConfig().put("access.token.claim", "true");
+            mapper.getConfig().put("userinfo.token.claim", "false");
+
+            // Agregar el mapper al scope "roles"
+            keycloak.realm(realm).clientScopes().get(clientScopeResource.getId()).getProtocolMappers().createMapper(mapper);
+        } else {
+            System.out.println("No se encontró el scope 'roles'.");
+        }
+
+
+    }
+
+
+
+
 
 
 
