@@ -65,7 +65,9 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         createUser();
 //        createClientScope();
 //        createClientScopeMapper();
-        createClientScopeMapperxxxx();
+        createGroup();
+        addClientScopeMapper();
+        addUserToGroup();
 
 
     }
@@ -88,6 +90,7 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         rolesResource.create(roleRepresentation);
         System.out.println("Roll" +  roles + "creado exitosamente.");
     }
+
 
     private void createUser() {
 
@@ -187,32 +190,39 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 
 
 
-    private void createClientScopeMapperxxxx() {
+    private void addClientScopeMapper() {
 
         ClientScopeRepresentation clientScopeResource = keycloak.realm(realm).clientScopes().findAll().stream().filter(clientScope -> clientScope.getName().equals("roles")).findFirst().get();
 
-        if (clientScopeResource != null) {
-            // Crear el mapper
-            ProtocolMapperRepresentation mapper = new ProtocolMapperRepresentation();
-            mapper.setName(mapperName);
-            mapper.setProtocol("openid-connect");
-            mapper.setProtocolMapper(mapperType);
-
-            mapper.setConfig(new HashMap<>());
-            mapper.getConfig().put("claim.name", "testgroups");
-            mapper.getConfig().put("full.path", "false");
-            mapper.getConfig().put("id.token.claim", "true");
-            mapper.getConfig().put("access.token.claim", "true");
-            mapper.getConfig().put("userinfo.token.claim", "false");
-
-            // Agregar el mapper al scope "roles"
-            keycloak.realm(realm).clientScopes().get(clientScopeResource.getId()).getProtocolMappers().createMapper(mapper);
-        } else {
-            System.out.println("No se encontró el scope 'roles'.");
-        }
+        keycloak.realm(realm).clientScopes().get(clientScopeResource.getId()).getProtocolMappers().createMapper(createProtocolMapper());
 
 
     }
+
+
+    private void createGroup(){
+        RealmResource realmResource = keycloak.realm(realm);
+        GroupsResource groupsResource = realmResource.groups();
+        GroupRepresentation groupRepresentation = new GroupRepresentation();
+        groupRepresentation.setName("PROVIDERS");
+        groupsResource.add(groupRepresentation);
+    }
+
+
+
+
+    private void addUserToGroup() {
+
+
+        GroupRepresentation group = keycloak.realm(realm).groups().groups().stream().filter(g -> g.getName().equals("PROVIDERS")).findFirst().orElse(null);
+
+        UserRepresentation user = keycloak.realm(realm).users().search("intadmin").get(0);
+
+        keycloak.realm(realm).users().get(user.getId()).joinGroup(group.getId());
+
+
+    }
+
 
 
 
