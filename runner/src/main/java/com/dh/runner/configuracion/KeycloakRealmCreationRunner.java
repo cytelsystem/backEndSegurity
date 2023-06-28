@@ -65,18 +65,18 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws IOException {
 
-//        createRealm();
+        createRealm();
 
 //        createRealmRole();
 
-//        createUser();
+        createUser();
 
 //        createClientScope();
 //        createClientScopeMapper();
 
-//        createGroup();
-//        addClientScopeMapper();
-//        addUserToGroup();
+        createGroup();
+        addClientScopeMapper();
+        addUserToGroup();
 
         createClientIDGateway(
         "api-gateway-client",
@@ -86,7 +86,7 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         "vj4VpqGp8CKru6rRORf6DANrF3FFVX1C",
         true,
         false,
-        false,
+        true,
         false,
         "openid-connect"
 
@@ -307,10 +307,13 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         ClientRepresentation.setPublicClient(setPublicClient);
         ClientRepresentation.setProtocol(setProtocol);
         ClientRepresentation.setRootUrl("http://localhost:9090"); /*Root URL */
-        ClientRepresentation.setBaseUrl("http://localhost:9090"); /*Home URL*/
-        ClientRepresentation.setAdminUrl("/."); /*Admin URL*/
+        ClientRepresentation.setBaseUrl(""); /*Home URL*/
+        ClientRepresentation.setAdminUrl(""); /*Admin URL*/
 
-        List<String> uris = List.of("https://example.com/callback1", "https://example.com/callback2");
+        List<String> urisOrigin = List.of("/*");
+        ClientRepresentation.setWebOrigins(urisOrigin); /*Admin URL*/
+
+        List<String> uris = List.of("http://localhost:9090/*", "https://oauth.pstmn.io/v1/browser-callback");
         ClientRepresentation.setRedirectUris(uris);
 
         clientsResource.create(ClientRepresentation);
@@ -353,11 +356,14 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         ClientRepresentation.setDirectAccessGrantsEnabled(setDirectAccessGrantsEnabled);
         ClientRepresentation.setPublicClient(setPublicClient);
         ClientRepresentation.setProtocol(setProtocol);
-        ClientRepresentation.setRootUrl("http://localhost:8083"); /*Root URL */
-        ClientRepresentation.setBaseUrl("http://localhost:9090"); /*Home URL*/
-        ClientRepresentation.setAdminUrl("/."); /*Admin URL*/
+        ClientRepresentation.setRootUrl(""); /*Root URL */
+        ClientRepresentation.setBaseUrl(""); /*Home URL*/
+        ClientRepresentation.setAdminUrl(""); /*Admin URL*/
 
-        List<String> uris = List.of("https://example.com/callback1", "https://example.com/callback2");
+        List<String> urisOrigin = List.of("/*");
+        ClientRepresentation.setWebOrigins(urisOrigin); /*Admin URL*/
+
+        List<String> uris = List.of("/*");
         ClientRepresentation.setRedirectUris(uris);
 
         clientsResource.create(ClientRepresentation);
@@ -401,11 +407,14 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         ClientRepresentation.setDirectAccessGrantsEnabled(setDirectAccessGrantsEnabled);
         ClientRepresentation.setPublicClient(setPublicClient);
         ClientRepresentation.setProtocol(setProtocol);
-        ClientRepresentation.setRootUrl("http://localhost:8084"); /*Root URL */
-        ClientRepresentation.setBaseUrl("http://localhost:9090"); /*Home URL*/
-        ClientRepresentation.setAdminUrl("/."); /*Admin URL*/
+        ClientRepresentation.setRootUrl(""); /*Root URL */
+        ClientRepresentation.setBaseUrl(""); /*Home URL*/
+        ClientRepresentation.setAdminUrl(""); /*Admin URL*/
 
-        List<String> uris = List.of("https://example.com/callback1", "https://example.com/callback2");
+        List<String> urisOrigin = List.of("/*");
+        ClientRepresentation.setWebOrigins(urisOrigin); /*Admin URL*/
+
+        List<String> uris = List.of("/*");
         ClientRepresentation.setRedirectUris(uris);
 
         clientsResource.create(ClientRepresentation);
