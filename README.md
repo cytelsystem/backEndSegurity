@@ -41,5 +41,8 @@ spring:
 ### puerto keycloak http://localhost:8080
 ### Conexion a gateway en http://localhost:9090/hello/user
 usuario = user
-Password = password123
+Password = password
 ### Microservicio esta en el puerto 8086
+
+
+# crear factura  http://localhost:9090/bills/crear

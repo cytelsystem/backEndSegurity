@@ -3,7 +3,7 @@ server:
 
 dh:
   keycloak:
-    auth-server-url: http://localhost:8080
+    auth-server-url: http://localhost:8082
   master:
     realm: master
     username: admin

@@ -9,7 +9,7 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8080/realms/dh
+            issuer-uri: http://localhost:8082/realms/dh
         registration:
           keycloak:
             client-id: backend
@@ -20,7 +20,7 @@ spring:
 
 dh:
   keycloak:
-    auth-server-url: http://localhost:8080
+    auth-server-url: http://localhost:8082
   master:
     realm: master
     username: admin
