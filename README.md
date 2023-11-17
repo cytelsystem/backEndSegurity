@@ -79,7 +79,7 @@ git checkout feign-Final-SQL
 - Tipo: OAuth 2.0
 - "Header Prefix": Bearer
 
-### Configurar Nuevo Token
+### Configuracion para obtener un token Nuevo
 
 - Token Name: msbills
 - Grant type: Authorization Code
@@ -95,6 +95,7 @@ git checkout feign-Final-SQL
 
 - `redirect_url`: [http://localhost:9090/*](http://localhost:9090/*)
 
+# Crear una factura
 ## En el Body (raw y json)
 
 URL: `POST http://localhost:9090/bills/crear`
