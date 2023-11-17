@@ -124,6 +124,8 @@ El campo `customerBill` es el ID del usuario creado en Keycloak.
 ![image](https://github.com/cytelsystem/backEndSegurity/assets/41965648/10ca66d4-2750-4916-815f-7cba435effe3)
 ![image](https://github.com/cytelsystem/backEndSegurity/assets/41965648/c347fbef-5c6d-4000-9fba-c96999132ba2)
 
+![image](https://github.com/cytelsystem/backEndSegurity/assets/41965648/e136b159-62c2-4bf6-8d92-9a94c71351aa)
+
 
 
 
