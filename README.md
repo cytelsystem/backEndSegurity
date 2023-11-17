@@ -111,3 +111,6 @@ El campo `customerBill` es el ID del usuario creado en Keycloak.
 
 ¡Listo! Ahora deberías tener todo configurado correctamente.
 ```
+# imagen de postman
+
+![image](https://github.com/cytelsystem/backEndSegurity/assets/41965648/a6881fc6-edfa-48cf-ab8f-cb4c7729dafc)
