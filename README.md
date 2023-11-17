@@ -109,6 +109,9 @@ El campo `customerBill` es el ID del usuario creado en Keycloak.
   "totalPrice": 1520000
 }
 ```
+# Consultar Factura por id usuario
+## Primero obtener el token
+http://localhost:9090/users/facturas/99ce7a6f-a87a-4325-835e-7fb31c753b52
 
 ¡Listo! Ahora deberías tener todo configurado correctamente.
 
