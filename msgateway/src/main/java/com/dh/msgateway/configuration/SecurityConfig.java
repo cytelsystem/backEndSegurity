@@ -44,7 +44,7 @@ public class SecurityConfig {
 
     @Bean
     public ReactiveJwtDecoder jwtDecoder() {
-        return withJwkSetUri("http://localhost:8080/realms/dh/protocol/openid-connect/certs").build();
+        return withJwkSetUri("http://localhost:8082/realms/dh/protocol/openid-connect/certs").build();
     }
 
     @Bean

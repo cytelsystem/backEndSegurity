@@ -8,7 +8,7 @@
 ### //********************************************************************************************************//
 server.port=8086
 
-spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8080/realms/dh
+spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8082/realms/dh
 spring.security.oauth2.client.registration.keycloak.client-id=backend
 spring.security.oauth2.client.registration.keycloak.client-secret=CaZ4vUhbOAUuCKBV2rmVF4aUzlDpngz3
 spring.security.oauth2.client.registration.keycloak.redirect-uri=http://localhost:8086/login/oauth2/code/google
@@ -38,7 +38,7 @@ spring:
 ### //********************************************************************************************************//
 
 # Puertos y conexion
-### puerto keycloak http://localhost:8080
+### puerto keycloak http://localhost:8082
 ### Conexion a gateway en http://localhost:9090/hello/user
 usuario = user
 Password = password

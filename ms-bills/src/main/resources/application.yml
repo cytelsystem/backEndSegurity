@@ -1,0 +1,53 @@
+# Server Configuration
+server:
+  port: 8087
+#  servlet:
+#    context-path: /api/v1/
+
+# Spring Configuration
+spring:
+  application:
+    name: ms-bill
+
+
+  # JPA
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        jdbc:
+          time_zone: UTC
+  # Database
+  datasource:
+    url: jdbc:mysql://localhost:3306/db?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+
+  # Keycloak
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/dh
+        registration:
+          keycloak:
+            client-id: billsClient
+            client-secret: D5XMwh0Se35XdFxI839xqdLTMxQ8JtEG
+            redirect-uri: http://localhost:8087/login/oauth2/code/keycloak
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
+
