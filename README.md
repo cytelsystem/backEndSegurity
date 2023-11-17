@@ -104,8 +104,8 @@ El campo `customerBill` es el ID del usuario creado en Keycloak.
 
 ```json
 {
-  "customerBill": "07ff58dd-bb25-4192-9721-cb0000d4e94e",
-  "productBill": "cargadorddd5",
+  "customerBill": "99ce7a6f-a87a-4325-835e-7fb31c753b52",
+  "productBill": "vehiculo",
   "totalPrice": 1520000
 }
 ```
