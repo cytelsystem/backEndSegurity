@@ -58,10 +58,10 @@ Clona el repositorio:
 git clone https://github.com/cytelsystem/backEndSegurity.git
 ```
 
-Cambiate a la rama `feign-Final-SQL`:
+Cambiate a la rama `masterEvents`:
 
 ```bash
-git checkout feign-Final-SQL
+git checkout masterEvents
 ```
 
 # Levantar los Microservicios en el siguiente orden
@@ -88,7 +88,7 @@ git checkout feign-Final-SQL
 - Access Token URL: [http://localhost:8082/realms/dh/protocol/openid-connect/token](http://localhost:8082/realms/dh/protocol/openid-connect/token)
 - Client ID: api-gateway-client
 - Client Secret: toDBMTqzwxJsCd14cYL883YphnTcdgcb
-- Scope: openid
+- Scope: openid **O tambien openid userScope** ***Mirar este link* https://benjumeacarlos981.github.io/glosariodeterminos/Modificaci%C3%B3nPerfildeUsuarioScopes.pdf
 - Client Authentication: Send as Basic Auth header
 
 ### Auth Request
