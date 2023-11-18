@@ -5,11 +5,13 @@ import com.dh.usersService.model.UserDTO;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.GroupRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -27,8 +29,29 @@ public class KeyCloakUserRepository implements IUserRepository{
 
     //******************Metodos Implementados de la interface***********************//
 
+//    @Override
+//    public UserDTO createUser(UserDTO user) {
+//        UserRepresentation newUser = new UserRepresentation();
+//        newUser.setUsername(user.getUsername());
+//        newUser.setEmail(user.getEmail());
+//        newUser.setFirstName(user.getFirstName());
+//        newUser.setEnabled(true);
+//        CredentialRepresentation credential = new CredentialRepresentation();
+//        credential.setType(CredentialRepresentation.PASSWORD);
+//        credential.setValue("password");
+//        credential.setTemporary(false);
+//        newUser.setCredentials(Arrays.asList(credential));
+//
+//
+//        keycloak.realm(realm).users().create(newUser);
+//
+//
+//        return toUser(newUser);
+//    }
+
     @Override
     public UserDTO createUser(UserDTO user) {
+        // Crear usuario
         UserRepresentation newUser = new UserRepresentation();
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
@@ -40,28 +63,28 @@ public class KeyCloakUserRepository implements IUserRepository{
         credential.setTemporary(false);
         newUser.setCredentials(Arrays.asList(credential));
 
+        Response response = keycloak.realm(realm).users().create(newUser);
 
+        // Verificar si la creación fue exitosa
+        if (response.getStatus() != 201) {
+            throw new RuntimeException("Error al crear el usuario en Keycloak. Código de estado: " + response.getStatus());
+        }
 
-        // Establecer otros atributos necesarios para el usuario
+        // Obtener el ID del nuevo usuario
+        String userId = response.getLocation().getPath().replaceAll(".*/([^/]+)$", "$1");
 
-//        RealmResource realmResource = keycloak.realm("cytelsystem");
-//        UsersResource usersResource = realmResource.users();
-//        UserRepresentation user = new UserRepresentation();
+        // Adicionar al usuario al grupo PROVIDERS
+        GroupRepresentation group = keycloak.realm(realm).groups().groups().stream().filter(g -> g.getName().equals("PROVIDERS")).findFirst().orElse(null);
 
-//        user.setUsername("intadmin");
-//        user.setEnabled(true);
-//        CredentialRepresentation credential = new CredentialRepresentation();
-//        credential.setType(CredentialRepresentation.PASSWORD);
-//        credential.setValue("password");
-//        credential.setTemporary(false);
-//        user.setCredentials(Arrays.asList(credential));
-//        usersResource.create(user);
-
-        keycloak.realm(realm).users().create(newUser);
-
+        if (group != null) {
+            keycloak.realm(realm).users().get(userId).joinGroup(group.getId());
+        } else {
+            throw new RuntimeException("No se encontró el grupo PROVIDERS en Keycloak.");
+        }
 
         return toUser(newUser);
     }
+
 
     @Override
     public List<UserDTO> findAllUsers() {
