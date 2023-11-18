@@ -22,6 +22,8 @@ public class userController {
   @Autowired
   private IFeignMsBills IFeignMsBills;
 
+
+
   @GetMapping("/facturas1/{idBill}")
   public String obtenerFactura(@PathVariable Long idBill) {
     // Puedes hacer operaciones con idBill si es necesario

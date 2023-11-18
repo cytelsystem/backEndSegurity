@@ -19,5 +19,13 @@ public class UserService {
 
     }
 
+    public UserDTO createUser(UserDTO user) {
+        // Realiza cualquier validación o lógica adicional necesaria
+
+
+        // Llama al método createUser del repositorio
+        return IUserRepository.createUser(user);
+    }
+
 
 }
