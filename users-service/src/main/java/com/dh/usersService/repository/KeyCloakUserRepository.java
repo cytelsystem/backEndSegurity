@@ -61,6 +61,7 @@ public class KeyCloakUserRepository implements IUserRepository{
         // Añadir el nuevo campo personalizado "titulo"
         Map<String, List<String>> attributes = new HashMap<>();
         attributes.put("titulo", Arrays.asList("Pintor"));
+        attributes.put("departamento", Arrays.asList(user.getDepartamento()));
         newUser.setAttributes(attributes);
 
         newUser.setEnabled(true);
@@ -115,6 +116,15 @@ public class KeyCloakUserRepository implements IUserRepository{
 
         return toUser(user);
     }
+
+    @Override
+    public UserDTO findByEmail(String email) {
+        List<UserRepresentation> users = keycloak.realm(realm).users().search(email);
+        return users.stream().findFirst().map(this::toUser).orElse(null);
+    }
+
+
+
 
     @Override
     public UserDTO updateNationality(String id, String nationality) {

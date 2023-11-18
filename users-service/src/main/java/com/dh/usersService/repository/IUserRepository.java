@@ -2,6 +2,7 @@ package com.dh.usersService.repository;
 
 
 import com.dh.usersService.model.UserDTO;
+import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +13,9 @@ public interface IUserRepository {
     public List<UserDTO> findAllUsers();
 
     public List<UserDTO> findByFirName(String name);
+
+
+    public UserDTO findByEmail(String email);
 
     public UserDTO findById(String id);
 
