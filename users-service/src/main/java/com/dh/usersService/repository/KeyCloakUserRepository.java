@@ -53,9 +53,16 @@ public class KeyCloakUserRepository implements IUserRepository{
     public UserDTO createUser(UserDTO user) {
         // Crear usuario
         UserRepresentation newUser = new UserRepresentation();
+
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
         newUser.setFirstName(user.getFirstName());
+
+        // Añadir el nuevo campo personalizado "titulo"
+        Map<String, List<String>> attributes = new HashMap<>();
+        attributes.put("titulo", Arrays.asList("Pintor"));
+        newUser.setAttributes(attributes);
+
         newUser.setEnabled(true);
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
