@@ -13,8 +13,8 @@ import Keycloak from 'keycloak-js';
   Init Options
 */
 let initOptions = {
-  url: 'http://localhost:8080/',
-  realm: 'master',
+  url: 'http://localhost:8082/',
+  realm: 'dh',
   clientId: 'react-client',
 }
 
@@ -50,11 +50,40 @@ function App() {
 
   const [infoMessage, setInfoMessage] = useState('');
 
-  /* To demonstrate : http client adds the access token to the Authorization header */
   const callBackend = () => {
-    httpClient.get('https://mockbin.com/request')
+    const requestData = {
+      customerBill: "bbdc9dfc-fac1-4d90-9224-bb8b9e3787b1",
+      productBill: "ya lo logre crear",
+      totalPrice: 1500,
+    };
+
+    const config = {
+      // headers: {
+      //   Authorization: `Bearer ${kc.token}`,
+      //   'Content-Type': 'application/json',
+      // },
+      headers: {
+        Authorization: `Bearer ${kc.token}`,
+        'Content-Type': 'application/json;charset=UTF-8',
+      }
+    };
+
+    httpClient.post('/bills/crear', requestData, config)
+    .then(response => {
+      console.log('POST Request Successful:', response);
+      // Handle the response as needed
+    })
+    .catch(error => {
+      console.error('POST Request Error:', error);
+      // Handle the error as needed
+    });
+
 
   };
+
+
+
+
 
   return (
     <div className="App">
