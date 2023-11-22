@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/bills")
 @RequiredArgsConstructor
 public class BillController {
@@ -19,7 +20,7 @@ public class BillController {
     private final BillService service;
 
 
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/crear")
     @PreAuthorize("hasAuthority('GROUP_PROVIDERS')")
     public ResponseEntity<String> crear(@RequestBody Bill o){
