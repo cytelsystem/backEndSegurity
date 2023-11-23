@@ -13,11 +13,11 @@ module.exports = function(app) {
 
   // Endpoint para GET /user/id
   app.use(
-    '/user/id',
+    '/users/adicionargrupo',
     createProxyMiddleware({
       target: 'http://localhost:9090',  // Cambia esto según tu ruta de backend
       changeOrigin: true,
-      pathRewrite: {'^/user/id' : '/user/id'},
+      pathRewrite: {'^/users/adicionargrupo' : '/users/adicionargrupo'},
     })
   );
 };

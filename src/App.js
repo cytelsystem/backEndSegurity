@@ -34,6 +34,7 @@ kc.init({
     console.log('Keycloak', kc)
     console.log('Access Token', kc.token)
 
+
     /* http client will use this header in every request it sends */
     httpClient.defaults.headers.common['Authorization'] = `Bearer ${kc.token}`;
 
@@ -50,10 +51,12 @@ function App() {
 
   const [infoMessage, setInfoMessage] = useState('');
   const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState(null);
 
   useEffect(() => {
     // Use the Keycloak object to get the user ID after authentication
     if (kc.authenticated) {
+      setUserName(kc.tokenParsed.preferred_username);
       setUserId(kc.tokenParsed.sub);
     }
   }, [kc.authenticated]);
@@ -66,10 +69,6 @@ function App() {
     };
 
     const config = {
-      // headers: {
-      //   Authorization: `Bearer ${kc.token}`,
-      //   'Content-Type': 'application/json',
-      // },
       headers: {
         Authorization: `Bearer ${kc.token}`,
         'Content-Type': 'application/json;charset=UTF-8',
@@ -88,6 +87,38 @@ function App() {
 
 
   };
+
+
+  //******************************Agregar el usuario al grupo CREAREVENTOS***************************** */
+
+  const agregarGrupoCrearEventos = () => {
+
+    console.log("Nombre usuario: ", userName)
+
+    const requestData = {
+      usuarioautenticado: userName,
+      adicionaragrupo: "CREAREVENTOS",
+    };
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${kc.token}`,
+        'Content-Type': 'application/json;charset=UTF-8',
+      }
+    };
+
+    httpClient.post('/users/adicionargrupo', requestData, config)
+    .then(response => {
+      console.log('POST Request Successful:', response);
+      // Handle the response as needed
+    })
+    .catch(error => {
+      console.error('POST Request Error:', error);
+      // Handle the error as needed
+    });
+  };
+
+  //********************************************************************************************** */
 
 
 
@@ -160,6 +191,13 @@ function App() {
               className="m-1 custom-btn-style"
               label='Get User ID'
               severity="info" />
+
+            <Button
+              onClick={agregarGrupoCrearEventos}
+              className="m-1 custom-btn-style"
+              label='Agregar usuario a CREAREVENTOS'
+              severity="info" />
+
 
           </div>
         </div>
