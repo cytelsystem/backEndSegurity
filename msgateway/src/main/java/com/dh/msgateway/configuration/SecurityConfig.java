@@ -12,21 +12,6 @@ import reactor.core.publisher.Mono;
 import static org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder.withJwkSetUri;
 
 
-//@Configuration
-//public class SecurityConfig {
-//    @Bean
-//    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-//        http
-//                .csrf().disable()
-//                .authorizeExchange()
-//                .anyExchange()
-//                .authenticated()
-//                .and()
-//                .oauth2Login(); // to redirect to oauth2 login page.
-//        return http.build();
-//    }
-//}
-
 
 @Configuration
 @EnableWebFluxSecurity
@@ -44,12 +29,11 @@ public class SecurityConfig {
 
     @Bean
     public ReactiveJwtDecoder jwtDecoder() {
-        return withJwkSetUri("http://localhost:8082/realms/dh/protocol/openid-connect/certs").build();
+        return withJwkSetUri("http://localhost:8082/realms/masterEvents/protocol/openid-connect/certs").build();
     }
 
     @Bean
     public WebSessionManager webSessionManager() {
-// Emulate SessionCreationPolicy. STATELESS
         return exchange -> Mono.empty();
     }
 }

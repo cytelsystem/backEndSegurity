@@ -33,7 +33,7 @@ public class OAuth2ResourceServerSecurityConfiguration {
 
     @Bean
     public JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withJwkSetUri("http://localhost:8082/realms/dh/protocol/openid-connect/certs").build();
+        return NimbusJwtDecoder.withJwkSetUri("http://localhost:8082/realms/masterEvents/protocol/openid-connect/certs").build();
     }
 }
 

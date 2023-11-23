@@ -22,7 +22,7 @@ public class BillController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/crear")
-    @PreAuthorize("hasAuthority('GROUP_PROVIDERS')")
+    @PreAuthorize("hasAuthority('GROUP_CREAREVENTOS')")
     public ResponseEntity<String> crear(@RequestBody Bill o){
         ResponseEntity<String> respuesta = null;
 

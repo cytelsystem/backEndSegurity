@@ -9,10 +9,10 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/dh
+            issuer-uri: http://localhost:8082/realms/masterEvents
         registration:
           keycloak:
-            client-id: backend
+            client-id: clientUsers
             client-secret: CaZ4vUhbOAUuCKBV2rmVF4aUzlDpngz3
             redirect-uri: http://localhost:9090/login/oauth2/code/keycloak
 
@@ -27,7 +27,7 @@ dh:
     password: admin
     clientId: admin-cli
   nuevoReino:
-    realm: dh
+    realm: masterEvents
     new_username: user
     new_password: password
     new_realm_roles: USER

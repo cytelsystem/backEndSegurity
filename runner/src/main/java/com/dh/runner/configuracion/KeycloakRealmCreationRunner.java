@@ -65,7 +65,7 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws IOException {
 
-        createRealm(); /*Crear realm mercadopagohjm*/
+        createRealm(); /*Crear realm mastrEvents*/
 
 //        createRealmRole();
 
@@ -74,10 +74,10 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 //        createClientScope(); /*Crear un client Scope*/
 //        createClientScopeMapper(); /*Crear un client Scope y adiconarle un mapper*/
 
-        createGroup("PROVIDERS"); /*Crear un grupo personal llamado PROVIDERS*/
-        createGroup("CREAREVENTOS"); /*Crear un grupo personal llamado PROVIDERS*/
-        addClientScopeMapper(); /*Adicionar el grupo PROVIDERS al scope roles*/
-        addUserToGroup(); /*Adicionar el usuario intadmin al grupo PROVIDERS*/
+        createGroup("USUARIOS"); /*Crear un grupo personal llamado USUARIOS*/
+        createGroup("CREAREVENTOS"); /*Crear un grupo personal llamado CREAREVENTOS*/
+        addClientScopeMapper(); /*Adicionar el grupo USUARIOS al scope roles*/
+        addUserToGroup(); /*Adicionar el usuario intadmin al grupo USUARIOS*/
 
         createClientIDGateway(
         "api-gateway-client",
@@ -93,9 +93,10 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 
         );
 
-        createClientIDBackEnd(
-                "backend",
-                "backend",
+
+        createClientIDUsers(
+                "clientUsers",
+                "clientUsers",
                 true,
                 "client-secret",
                 "CaZ4vUhbOAUuCKBV2rmVF4aUzlDpngz3",
@@ -121,9 +122,10 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 
         );
 
-        createClientIDBills(
-                "billsClient",
-                "billsClient",
+
+        createClientIDEvents(
+                "clientEvents",
+                "clientEvents",
                 true,
                 "client-secret",
                 "D5XMwh0Se35XdFxI839xqdLTMxQ8JtEG",
@@ -243,13 +245,6 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
     }
 
 
-    // private void createGroup(){
-    //     RealmResource realmResource = keycloak.realm(realm);
-    //     GroupsResource groupsResource = realmResource.groups();
-    //     GroupRepresentation groupRepresentation = new GroupRepresentation();
-    //     groupRepresentation.setName("PROVIDERS");
-    //     groupsResource.add(groupRepresentation);
-    // }
 
     private void createGroup(String grupo){
         RealmResource realmResource = keycloak.realm(realm);
@@ -266,7 +261,7 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
     private void addUserToGroup() {
 
 
-        GroupRepresentation group = keycloak.realm(realm).groups().groups().stream().filter(g -> g.getName().equals("PROVIDERS")).findFirst().orElse(null);
+        GroupRepresentation group = keycloak.realm(realm).groups().groups().stream().filter(g -> g.getName().equals("USUARIOS")).findFirst().orElse(null);
 
         UserRepresentation user = keycloak.realm(realm).users().search("intadmin").get(0);
 
@@ -396,7 +391,7 @@ private void createClientIDReact(
 
     //***************************************************ClientBackEnd************************************************************//
 
-    private void createClientIDBackEnd(
+    private void createClientIDUsers(
             String setClientId,
             String setName,
             boolean setEnabled,
@@ -447,7 +442,7 @@ private void createClientIDReact(
 
     //****************************************************ClientBills************************************************************//
 
-    private void createClientIDBills(
+    private void createClientIDEvents(
             String setClientId,
             String setName,
             boolean setEnabled,
