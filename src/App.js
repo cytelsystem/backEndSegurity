@@ -21,12 +21,12 @@ let initOptions = {
 let kc = new Keycloak(initOptions);
 
 kc.init({
-  onLoad: 'login-required', // Supported values: 'check-sso' , 'login-required'
+  onLoad: 'check-sso', // Supported values: 'check-sso' , 'login-required'
   checkLoginIframe: true,
   pkceMethod: 'S256'
 }).then((auth) => {
   if (!auth) {
-    window.location.reload();
+    // window.location.reload();
   } else {
     /* Remove below logs if you are using this on production */
     console.info("Authenticated");
