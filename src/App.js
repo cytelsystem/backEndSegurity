@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -49,11 +49,19 @@ kc.init({
 function App() {
 
   const [infoMessage, setInfoMessage] = useState('');
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // Use the Keycloak object to get the user ID after authentication
+    if (kc.authenticated) {
+      setUserId(kc.tokenParsed.sub);
+    }
+  }, [kc.authenticated]);
 
   const callBackend = () => {
     const requestData = {
-      customerBill: "bbdc9dfc-fac1-4d90-9224-bb8b9e3787b1",
-      productBill: "ya lo logre crear",
+      customerBill: userId,
+      productBill: "factura con user id automatico",
       totalPrice: 1500,
     };
 
@@ -146,6 +154,11 @@ function App() {
             <Button onClick={() => { setInfoMessage(kc.hasResourceRole('test').toString()) }}
               className="m-1 custom-btn-style"
               label='has client role "test"'
+              severity="info" />
+
+            <Button onClick={() => { setInfoMessage(`User ID: ${userId}`) }}
+              className="m-1 custom-btn-style"
+              label='Get User ID'
               severity="info" />
 
           </div>

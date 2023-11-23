@@ -1,12 +1,23 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
+  // Endpoint para POST /bills/crear
   app.use(
-    '/bills/crear',  // Cambia esto según tu ruta de backend
+    '/bills/crear',
     createProxyMiddleware({
       target: 'http://localhost:9090',
       changeOrigin: true,
-      pathRewrite: {'^/bills/crear' : '/bills/crear'},  // Agregamos esta opción para reescribir la ruta
+      pathRewrite: {'^/bills/crear' : '/bills/crear'},
+    })
+  );
+
+  // Endpoint para GET /user/id
+  app.use(
+    '/user/id',
+    createProxyMiddleware({
+      target: 'http://localhost:9090',  // Cambia esto según tu ruta de backend
+      changeOrigin: true,
+      pathRewrite: {'^/user/id' : '/user/id'},
     })
   );
 };
