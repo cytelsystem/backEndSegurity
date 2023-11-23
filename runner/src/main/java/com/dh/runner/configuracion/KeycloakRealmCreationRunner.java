@@ -74,7 +74,8 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
 //        createClientScope(); /*Crear un client Scope*/
 //        createClientScopeMapper(); /*Crear un client Scope y adiconarle un mapper*/
 
-        createGroup(); /*Crear un grupo personal llamado PROVIDERS*/
+        createGroup("PROVIDERS"); /*Crear un grupo personal llamado PROVIDERS*/
+        createGroup("CREAREVENTOS"); /*Crear un grupo personal llamado PROVIDERS*/
         addClientScopeMapper(); /*Adicionar el grupo PROVIDERS al scope roles*/
         addUserToGroup(); /*Adicionar el usuario intadmin al grupo PROVIDERS*/
 
@@ -102,6 +103,20 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
                 false,
                 false,
                 false,
+                "openid-connect"
+
+        );
+
+        createClientIDReact(
+                "react-client",
+                "react-client",
+                true,
+                "none",
+                "EaKWN0BKPfDdSD6LXdVsU3g3dIZDkjaL",
+                false,
+                false,
+                false,
+                true,
                 "openid-connect"
 
         );
@@ -228,12 +243,21 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
     }
 
 
-    private void createGroup(){
+    // private void createGroup(){
+    //     RealmResource realmResource = keycloak.realm(realm);
+    //     GroupsResource groupsResource = realmResource.groups();
+    //     GroupRepresentation groupRepresentation = new GroupRepresentation();
+    //     groupRepresentation.setName("PROVIDERS");
+    //     groupsResource.add(groupRepresentation);
+    // }
+
+    private void createGroup(String grupo){
         RealmResource realmResource = keycloak.realm(realm);
         GroupsResource groupsResource = realmResource.groups();
         GroupRepresentation groupRepresentation = new GroupRepresentation();
-        groupRepresentation.setName("PROVIDERS");
+        groupRepresentation.setName(grupo);
         groupsResource.add(groupRepresentation);
+
     }
 
 
@@ -310,7 +334,7 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         ClientRepresentation.setBaseUrl(""); /*Home URL*/
         ClientRepresentation.setAdminUrl(""); /*Admin URL*/
 
-        List<String> urisOrigin = List.of("/*");
+        List<String> urisOrigin = List.of("*");
         ClientRepresentation.setWebOrigins(urisOrigin); /*Admin URL*/
 
         List<String> uris = List.of("http://localhost:9090/*", "https://oauth.pstmn.io/v1/browser-callback");
@@ -319,6 +343,55 @@ public class KeycloakRealmCreationRunner implements CommandLineRunner {
         clientsResource.create(ClientRepresentation);
 
     }
+
+
+    //***************************************************ClientReact************************************************************//
+
+private void createClientIDReact(
+        String setClientId,
+        String setName,
+        boolean setEnabled,
+        String setClientAuthenticatorType,
+        String setSecret,
+        boolean setServiceAccountsEnabled,
+        boolean setAuthorizationServicesEnabled,
+        boolean setDirectAccessGrantsEnabled,
+        boolean setPublicClient,
+        String setProtocol
+)
+{
+    RealmResource realmResource = keycloak.realm(realm);
+    ClientsResource clientsResource = realmResource.clients();
+    ClientRepresentation clientRepresentation = new ClientRepresentation();
+
+    //***********************************************************************************//
+
+    clientRepresentation.setClientId(setClientId);
+    clientRepresentation.setName(setName);
+    clientRepresentation.setEnabled(setEnabled);
+
+    // Desactivar Client Authentication
+    clientRepresentation.setClientAuthenticatorType(setClientAuthenticatorType); // "none" significa desactivado
+
+    clientRepresentation.setSecret(setSecret);
+    clientRepresentation.setServiceAccountsEnabled(setServiceAccountsEnabled);
+    clientRepresentation.setAuthorizationServicesEnabled(setAuthorizationServicesEnabled);
+    clientRepresentation.setDirectAccessGrantsEnabled(setDirectAccessGrantsEnabled);
+    clientRepresentation.setPublicClient(setPublicClient); //setClientAuthenticatorType = none y setPublicClient = true esto desabilita Client authentication
+    clientRepresentation.setProtocol(setProtocol);
+    clientRepresentation.setRootUrl(""); /*Root URL */
+    clientRepresentation.setBaseUrl(""); /*Home URL*/
+    clientRepresentation.setAdminUrl(""); /*Admin URL*/
+
+
+    List<String> urisOrigin = List.of("*");
+    clientRepresentation.setWebOrigins(urisOrigin); /*Admin URL*/
+
+    List<String> uris = List.of("http://localhost:3000/*");
+    clientRepresentation.setRedirectUris(uris);
+
+    clientsResource.create(clientRepresentation);
+}
 
 
     //***************************************************ClientBackEnd************************************************************//

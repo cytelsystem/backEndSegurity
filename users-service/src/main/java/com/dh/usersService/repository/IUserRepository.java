@@ -2,6 +2,7 @@ package com.dh.usersService.repository;
 
 
 import com.dh.usersService.model.UserDTO;
+import com.dh.usersService.model.UserToGrup;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +25,8 @@ public interface IUserRepository {
     public UserDTO updateNationality(String id, String nationality);
 
     public UserDTO createUser(UserDTO user);
+
+    public UserToGrup addUserToGroup(UserToGrup data);
 
 
 }

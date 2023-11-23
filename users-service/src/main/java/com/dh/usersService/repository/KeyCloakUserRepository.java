@@ -2,6 +2,7 @@ package com.dh.usersService.repository;
 
 
 import com.dh.usersService.model.UserDTO;
+import com.dh.usersService.model.UserToGrup;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -49,6 +50,15 @@ public class KeyCloakUserRepository implements IUserRepository{
 //        return toUser(newUser);
 //    }
 
+
+    @Override
+    public UserToGrup addUserToGroup(UserToGrup data) {
+        GroupRepresentation group = keycloak.realm(realm).groups().groups().stream().filter(g -> g.getName().equals(data.getAdicionaragrupo())).findFirst().orElse(null);
+        UserRepresentation user = keycloak.realm(realm).users().search(data.getUsuarioautenticado()).get(0);
+        keycloak.realm(realm).users().get(user.getId()).joinGroup(group.getId());
+        return data;
+    }
+
     @Override
     public UserDTO createUser(UserDTO user) {
         // Crear usuario
@@ -94,12 +104,13 @@ public class KeyCloakUserRepository implements IUserRepository{
     }
 
 
+
+
+
     @Override
     public List<UserDTO> findAllUsers() {
         List<UserRepresentation> users = keycloak.realm(realm).users().list();
         return users.stream().map(this::toUser).collect(Collectors.toList());
-
-
     }
 
 

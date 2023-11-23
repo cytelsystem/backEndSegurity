@@ -3,6 +3,7 @@ package com.dh.usersService.service;
 
 
 import com.dh.usersService.model.UserDTO;
+import com.dh.usersService.model.UserToGrup;
 import com.dh.usersService.repository.IUserRepository;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +18,21 @@ public class UserService {
     private IUserRepository IUserRepository;
 
 
+
     public UserDTO findbyId(String id){
         return IUserRepository.findById(id);
 
     }
 
     public UserDTO createUser(UserDTO user) {
-        // Realiza cualquier validación o lógica adicional necesaria
-
-
-        // Llama al método createUser del repositorio
         return IUserRepository.createUser(user);
     }
+
+    public UserToGrup addUserToGroup(UserToGrup data) {
+
+        return IUserRepository.addUserToGroup(data);
+    }
+
 
     public UserDTO findByEmail(String email) {
         return IUserRepository.findByEmail(email);
@@ -37,6 +41,8 @@ public class UserService {
     public List<UserDTO> findByFirstName(String name) {
         return IUserRepository.findByFirName(name);
     }
+
+
 
 
 
