@@ -64,7 +64,7 @@ function App() {
   const callBackend = () => {
     const requestData = {
       customerBill: userId,
-      productBill: "factura con user id automatico",
+      productBill: "OTRA FACTURA DE JOAQUIN",
       totalPrice: 1500,
     };
 
@@ -97,7 +97,7 @@ function App() {
 
     const requestData = {
       usuarioautenticado: userName,
-      adicionaragrupo: "CREAREVENTOS",
+      adicionaragrupo: "PROVIDERS",
     };
 
     const config = {
@@ -117,6 +117,36 @@ function App() {
       // Handle the error as needed
     });
   };
+
+
+  //******************************Consultar facturas por id del usuario***************************** */
+
+  const consultarFacturasIdUsuario = () => {
+    // Obtener el ID de usuario del estado (reemplaza 'tuUserId' con la variable que contiene el ID)
+    // const userId = userId;
+
+    // Configurar la solicitud
+    const config = {
+      headers: {
+        Authorization: `Bearer ${kc.token}`,
+      },
+    };
+
+    // Construir la URL del endpoint con el ID de usuario
+    const endpointUrl = `/users/facturas/${userId}`;
+
+    // Realizar la solicitud GET al endpoint
+    httpClient.get(endpointUrl, config)
+      .then(response => {
+        console.log('GET Request Successful:', response.data);
+        // Manejar la respuesta según sea necesario
+      })
+      .catch(error => {
+        console.error('GET Request Error:', error);
+        // Manejar el error según sea necesario
+      });
+  };
+
 
   //********************************************************************************************** */
 
@@ -196,6 +226,12 @@ function App() {
               onClick={agregarGrupoCrearEventos}
               className="m-1 custom-btn-style"
               label='Agregar usuario a CREAREVENTOS'
+              severity="info" />
+
+            <Button
+              onClick={consultarFacturasIdUsuario}
+              className="m-1 custom-btn-style"
+              label='Consultar Facturas'
               severity="info" />
 
 
