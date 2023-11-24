@@ -1,0 +1,50 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: gateway
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak-provider:
+            issuer-uri: http://localhost:8082/realms/masterEvents
+        registration:
+          api-gateway-service:
+            provider: keycloak-provider
+            client-id: api-gateway-client
+            client-secret: toDBMTqzwxJsCd14cYL883YphnTcdgcb
+            scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:9090/login/oauth2/code/keycloak
+
+spring.cloud.gateway:
+  default-filters:
+    - TokenRelay
+  routes:
+    - id: user-service
+      uri: http://localhost:8086
+      predicates:
+        - Path=/users/**
+    - id: api-event
+      uri: http://localhost:8087
+      predicates:
+        - Path=/event/**
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceURL:
+      defaultZone: http://localhost:8761/eureka
+  management:
+    endpoint:
+      gateway:
+        enabled: true
+    endpoints:
+      web:
+        exposure:
+          include: gateway
+
+

@@ -1,0 +1,625 @@
+{
+	"info": {
+		"_postman_id": "28b1c7d7-3ab4-4e57-a5dc-633e967a7b4f",
+		"name": "dh",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21827416",
+		"_collection_link": "https://www.postman.com/winter-trinity-224391/workspace/backendsegutity/collection/21827416-28b1c7d7-3ab4-4e57-a5dc-633e967a7b4f?action=share&source=collection_link&creator=21827416"
+	},
+	"item": [
+		{
+			"name": "crear dh",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var xsrfCookie = postman.getResponseCookie(\"XSRF-TOKEN\");\r",
+							"postman.setEnvironmentVariable(\"xsrf-token\", xsrfCookie.value);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "toDBMTqzwxJsCd14cYL883YphnTcdgcb",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9090/*",
+							"type": "string"
+						},
+						{
+							"key": "authRequestParams",
+							"value": [
+								{
+									"key": "redirect_url",
+									"value": "http://localhost:9090/*",
+									"enabled": true,
+									"send_as": "request_url"
+								}
+							],
+							"type": "any"
+						},
+						{
+							"key": "clientId",
+							"value": "api-gateway-client",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "msbills",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{xsrf-token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"customerBill\": \"99ce7a6f-a87a-4325-835e-7fb31c753b52\",\r\n    \"productBill\": \"vehiculo\",\r\n    \"totalPrice\": 370000\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/bills/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"bills",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Facturas por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var xsrfCookie = postman.getResponseCookie(\"XSRF-TOKEN\");\r",
+							"postman.setEnvironmentVariable(\"xsrf-token\", xsrfCookie.value);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "toDBMTqzwxJsCd14cYL883YphnTcdgcb",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9090/*",
+							"type": "string"
+						},
+						{
+							"key": "authRequestParams",
+							"value": [
+								{
+									"key": "redirect_url",
+									"value": "http://localhost:9090/*",
+									"enabled": true,
+									"send_as": "request_url"
+								}
+							],
+							"type": "any"
+						},
+						{
+							"key": "clientId",
+							"value": "api-gateway-client",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "msbills",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{xsrf-token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/users/facturas/99ce7a6f-a87a-4325-835e-7fb31c753b52",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users",
+						"facturas",
+						"99ce7a6f-a87a-4325-835e-7fb31c753b52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreacionUser",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9090/*",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "toDBMTqzwxJsCd14cYL883YphnTcdgcb",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "api-gateway-client",
+							"type": "string"
+						},
+						{
+							"key": "authRequestParams",
+							"value": [
+								{
+									"key": "Valid redirect URIs",
+									"value": "http://localhost:9090/*",
+									"enabled": true,
+									"send_as": "request_url"
+								}
+							],
+							"type": "any"
+						},
+						{
+							"key": "tokenName",
+							"value": "bills",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ortencia\",\r\n    \"email\": \"ortencia@gmail.com\",\r\n    \"firstName\": \"ortencia\",\r\n    \"departamento\": \"cundinamarca\",\r\n    \"nationality\": \"colombia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/users/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users",
+						"crear"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "d893ba32-5139-4e1b-8979-1b99df23a936",
+							"disabled": true
+						},
+						{
+							"key": "nationality",
+							"value": "Argentina",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9090/*",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "toDBMTqzwxJsCd14cYL883YphnTcdgcb",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "api-gateway-client",
+							"type": "string"
+						},
+						{
+							"key": "authRequestParams",
+							"value": [
+								{
+									"key": "Valid redirect URIs",
+									"value": "http://localhost:9090/*",
+									"enabled": true,
+									"send_as": "request_url"
+								}
+							],
+							"type": "any"
+						},
+						{
+							"key": "tokenName",
+							"value": "bills",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ortencia\",\r\n    \"email\": \"ortencia@gmail.com\",\r\n    \"firstName\": \"ortencia\",\r\n    \"departamento\": \"cundinamarca\",\r\n    \"nationality\": \"colombia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/users/id/747c4f69-8ce5-49c3-827b-0c485db24070",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users",
+						"id",
+						"747c4f69-8ce5-49c3-827b-0c485db24070"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "d893ba32-5139-4e1b-8979-1b99df23a936",
+							"disabled": true
+						},
+						{
+							"key": "nationality",
+							"value": "Argentina",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userEmail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9090/*",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "toDBMTqzwxJsCd14cYL883YphnTcdgcb",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "api-gateway-client",
+							"type": "string"
+						},
+						{
+							"key": "authRequestParams",
+							"value": [
+								{
+									"key": "Valid redirect URIs",
+									"value": "http://localhost:9090/*",
+									"enabled": true,
+									"send_as": "request_url"
+								}
+							],
+							"type": "any"
+						},
+						{
+							"key": "tokenName",
+							"value": "bills",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"username\": \"hector\",\r\n        \"email\": \"hectorjm@gmail.com\",\r\n        \"firstName\": \"hecticor\",\r\n        \"nationality\": \"Colombia\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/users/email/ortencia@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users",
+						"email",
+						"ortencia@gmail.com"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "d893ba32-5139-4e1b-8979-1b99df23a936",
+							"disabled": true
+						},
+						{
+							"key": "nationality",
+							"value": "Argentina",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userName",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "http://localhost:8082/realms/dh/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9090/*",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "toDBMTqzwxJsCd14cYL883YphnTcdgcb",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "api-gateway-client",
+							"type": "string"
+						},
+						{
+							"key": "authRequestParams",
+							"value": [
+								{
+									"key": "Valid redirect URIs",
+									"value": "http://localhost:9090/*",
+									"enabled": true,
+									"send_as": "request_url"
+								}
+							],
+							"type": "any"
+						},
+						{
+							"key": "tokenName",
+							"value": "bills",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"username\": \"hector\",\r\n        \"email\": \"hectorjm@gmail.com\",\r\n        \"firstName\": \"hecticor\",\r\n        \"nationality\": \"Colombia\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/users/name/ortencia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users",
+						"name",
+						"ortencia"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "d893ba32-5139-4e1b-8979-1b99df23a936",
+							"disabled": true
+						},
+						{
+							"key": "nationality",
+							"value": "Argentina",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

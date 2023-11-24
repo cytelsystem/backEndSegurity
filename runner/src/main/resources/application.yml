@@ -1,0 +1,17 @@
+server:
+  port: 8084
+
+dh:
+  keycloak:
+    auth-server-url: http://localhost:8082
+  master:
+    realm: master
+    username: admin
+    password: admin
+    clientId: admin-cli
+  nuevoReino:
+    realm: masterEvents
+    new_realm_roles: USER
+    new_username1: intadmin
+    new_password1: password
+    new_clientScopeName: gruposhj

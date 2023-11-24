@@ -1,0 +1,41 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: users-service
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/masterEvents
+        registration:
+          keycloak:
+            client-id: clientUsers
+            client-secret: CaZ4vUhbOAUuCKBV2rmVF4aUzlDpngz3
+            redirect-uri: http://localhost:9090/login/oauth2/code/keycloak
+
+
+
+dh:
+  keycloak:
+    auth-server-url: http://localhost:8082
+  master:
+    realm: master
+    username: admin
+    password: admin
+    clientId: admin-cli
+  nuevoReino:
+    realm: masterEvents
+    new_username: user
+    new_password: password
+    new_realm_roles: USER
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
