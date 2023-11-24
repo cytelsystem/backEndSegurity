@@ -1,0 +1,42 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: api-event
+#  config:
+#    import: configserver:http://localhost:8888
+
+#  config:
+#    enabled: true
+#    uri: http://localhost:8888
+
+  data:
+    mongodb:
+      uri: mongodb+srv://group3-PI2:fI21lcFyH4LlsT5M@cluster-pi2.uqv6omj.mongodb.net/MasterEvents
+      database: MasterEvents
+
+  # Keycloak
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/masterEvents
+        registration:
+          keycloak:
+            client-id: clientEvents
+            client-secret: D5XMwh0Se35XdFxI839xqdLTMxQ8JtEG
+            redirect-uri: http://localhost:8087/login/oauth2/code/keycloak
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
+
+

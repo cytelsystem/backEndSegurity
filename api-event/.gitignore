@@ -1,6 +1,3 @@
-/node_modules
-/keycloak-react-FrontEnd/node_modules
-
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -18,12 +15,6 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
-/msgateway/.idea
-/msgateway/.mvn
-/msgateway/target/
-/msventas/.idea
-/msventas/.mvn
-/msventas/target/
 *.iws
 *.iml
 *.ipr
@@ -40,5 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-.mvn/

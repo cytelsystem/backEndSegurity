@@ -27,10 +27,10 @@ spring.cloud.gateway:
       uri: http://localhost:8086
       predicates:
         - Path=/users/**
-    - id: ms-bill
+    - id: api-event
       uri: http://localhost:8087
       predicates:
-        - Path=/bills/**
+        - Path=/event/**
 
 eureka:
   client:
