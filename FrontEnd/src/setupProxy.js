@@ -1,13 +1,13 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
-  // Endpoint para POST /bills/crear
+  // Endpoint para POST /event/crear
   app.use(
-    '/api-event/SaveNewEvent',
+    '/event/crear',
     createProxyMiddleware({
       target: 'http://localhost:9090',
       changeOrigin: true,
-      pathRewrite: {'^/api-event/SaveNewEvent' : '/api-event/SaveNewEvent'},
+      pathRewrite: {'^/event/crear' : '/event/crear'},
     })
   );
 

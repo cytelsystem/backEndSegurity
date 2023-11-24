@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +27,9 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @PostMapping
+    @CrossOrigin(origins = "*")
+    @PostMapping("/crear")
+    @PreAuthorize("hasAuthority('GROUP_CREAREVENTOS')")
     public ResponseEntity<Event> SaveNewEvent(@RequestBody Event event) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

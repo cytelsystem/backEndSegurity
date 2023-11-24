@@ -63,24 +63,20 @@ function App() {
 
   //************************************Crear Evento***********************************//
   const callBackend = () => {
-    // const requestData = {
-    //   customerBill: userId,
-    //   productBill: "OTRA FACTURA DE JOAQUIN",
-    //   totalPrice: 1500,
-    // };
+
     const requestData = {
-      idCompany: 1, // Reemplaza con el valor adecuado
+      id: userId,
       nameEvent: "Nombre del Evento",
       description: "Descripción del evento",
       location: "Ubicación del evento",
       city: "Ciudad del evento",
-      date: "2023-11-23", // Reemplaza con la fecha adecuada en formato YYYY-MM-DD
+      date: "2023-11-23",
       category: "Categoría del evento",
-      minimumAge: 18, // Reemplaza con la edad mínima adecuada
+      minimumAge: 18,
       address: "Dirección del evento",
       openTime: "Hora de apertura del evento",
       images: ["link_imagen_1.jpg", "link_imagen_2.jpg"],
-      tickets: [], // Puedes agregar datos de los tickets si es necesario
+      tickets: [],
     };
 
     const config = {
@@ -90,7 +86,7 @@ function App() {
       }
     };
 
-    httpClient.post('/api-event/SaveNewEvent', requestData, config)
+    httpClient.post('/event/crear', requestData, config)
     .then(response => {
       console.log('POST Request Successful:', response);
       // Handle the response as needed
